@@ -44,8 +44,8 @@ public class LibraryController {
         return libraryDTO;
     }
     @GetMapping("/find")
-    public List<LibraryDTO> buscarFecha(@RequestParam boolean acess , @RequestParam String nombre){
-        return libraryService.findByAccesibilidadAndNombre(acess,nombre).stream().map(y->{
+    public List<LibraryDTO> findDate(@RequestParam Boolean available , @RequestParam String name){
+        return libraryService.findByLibraryAvailableAndLibraryName(available,name).stream().map(y->{
             ModelMapper m= new ModelMapper();
             return m.map(y,LibraryDTO.class);
         }).collect(Collectors.toList());

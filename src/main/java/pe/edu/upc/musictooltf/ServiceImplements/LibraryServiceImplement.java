@@ -34,7 +34,7 @@ public class LibraryServiceImplement implements ILibraryService {
     }
 
     @Override
-    public List<Library> findByAccesibilidadAndNombre(boolean access, String nombre) {
-        return findByAccesibilidadAndNombre(access,nombre);
+    public List<Library> findByLibraryAvailableAndLibraryName(Boolean available, String name) {
+        return libraryRepository.findByLibraryAvailableAndLibraryName(available,name);
     }
 }

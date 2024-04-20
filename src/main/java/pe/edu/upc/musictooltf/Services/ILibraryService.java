@@ -14,6 +14,6 @@ public interface ILibraryService {
 
     public Library findbyId(Integer id);
 
-    public List<Library> findByAccesibilidadAndNombre(boolean access, String name);
+    public List<Library> findByLibraryAvailableAndLibraryName(Boolean available, String name);
 
 }

@@ -7,7 +7,7 @@ import java.util.List;
 
 @Repository
 public interface ILibraryRepository extends JpaRepository<Library, Integer> {
-    public List<Library> findByAccesibilidadAndNombre(boolean access, String Nombre);
+    public List<Library> findByLibraryAvailableAndLibraryName(Boolean available, String name);
 
 }
 
