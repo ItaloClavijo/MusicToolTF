@@ -38,7 +38,7 @@ public class LibraryController {
     }
 
     @GetMapping("/{id}")
-    public LibraryDTO listarId(@PathVariable("id") Integer id){
+    public LibraryDTO listId(@PathVariable("id") Integer id){
         ModelMapper m=new ModelMapper();
         LibraryDTO libraryDTO=m.map(libraryService.findbyId(id),LibraryDTO.class);
         return libraryDTO;
