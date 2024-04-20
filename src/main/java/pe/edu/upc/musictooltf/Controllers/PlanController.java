@@ -35,7 +35,7 @@ public class PlanController {
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable("id") Integer id){ planService.findById(id); }
+    public void delete(@PathVariable("id") Integer id){ planService.delete(id); }
 
     @GetMapping("/{id}")
     public PlanDTO listId(@PathVariable("id") Integer id){
