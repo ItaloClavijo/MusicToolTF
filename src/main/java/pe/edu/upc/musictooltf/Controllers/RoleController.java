@@ -42,7 +42,6 @@ public class RoleController {
         return roleDTO;
     }
 
-
     @GetMapping("/find")
     public List<RoleDTO> findByRoleName(@RequestParam String name) {
         return roleService.findByRoleName(name).stream().map(y -> {
