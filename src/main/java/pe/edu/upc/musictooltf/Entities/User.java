@@ -10,12 +10,14 @@ import java.util.List;
 public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
+
     @Column(length = 30, unique = true)
     private String userName;
+
     @Column(length = 200)
     private String userPassword;
+
     private Boolean userEnabled;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
