@@ -3,7 +3,7 @@ package pe.edu.upc.musictooltf.Entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "PurchaseContentDTO")
+@Table(name = "PurchaseContent")
 public class PurchaseContent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

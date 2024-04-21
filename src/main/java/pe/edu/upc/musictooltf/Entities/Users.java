@@ -6,32 +6,30 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "User")
-public class User implements Serializable {
+@Table(name = "users")
+public class Users implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(length = 30, unique = true)
-    private String userName;
-
+    private String username;
     @Column(length = 200)
-    private String userPassword;
-
-    private Boolean userEnabled;
-
+    private String password;
+    private Boolean enabled;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private List<Role> roles;
 
-    public User() {
+    public Users() {
     }
 
-    public User(Long id, String userName, String userPassword, Boolean userEnabled) {
+    public Users(Long id, String userName, String userPassword, Boolean userEnabled, List<Role> role) {
         this.id = id;
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userEnabled = userEnabled;
+        this.username = userName;
+        this.password = userPassword;
+        this.enabled = userEnabled;
+        this.roles = role;
     }
 
     public Long getId() {
@@ -43,34 +41,34 @@ public class User implements Serializable {
     }
 
     public String getUserName() {
-        return userName;
+        return username;
     }
 
     public void setUserName(String userName) {
-        this.userName = userName;
+        this.username = userName;
     }
 
     public String getUserPassword() {
-        return userPassword;
+        return password;
     }
 
     public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+        this.password = userPassword;
     }
 
     public Boolean getUserEnabled() {
-        return userEnabled;
+        return enabled;
     }
 
     public void setUserEnabled(Boolean userEnabled) {
-        this.userEnabled = userEnabled;
+        this.enabled = userEnabled;
     }
 
-    public List<Role> getRoles() {
+    public List<Role> getRole() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public void setRole(List<Role> role) {
+        this.roles = role;
     }
 }

@@ -10,13 +10,13 @@ public class Library {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "available",nullable = false)
+    @Column(name = "libraryAvailable",nullable = false)
     private Boolean libraryAvailable;
 
-    @Column(name = "name",nullable = false, length = 100)
+    @Column(name = "libraryName",nullable = false, length = 100)
     private String libraryName;
 
-    @Column(name = "description",nullable = false, length = 100)
+    @Column(name = "libraryDescription",nullable = false, length = 100)
     private String libraryDescription;
 
     public Library(Integer id, Boolean libraryAvailable, String libraryName, String libraryDescription) {
