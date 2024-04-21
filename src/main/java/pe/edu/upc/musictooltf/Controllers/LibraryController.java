@@ -3,6 +3,7 @@ package pe.edu.upc.musictooltf.Controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.musictooltf.DTOs.LibraryDTO;
@@ -18,6 +19,7 @@ public class LibraryController {
 
     @Autowired
     private ILibraryService libraryService;
+
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Library save(@RequestBody @Validated LibraryDTO libraryDTO){
@@ -25,6 +27,8 @@ public class LibraryController {
         Library l = m.map(libraryDTO,Library.class);
         return libraryService.save(l);
     }
+
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     @GetMapping
     public List<LibraryDTO> list(){
         return libraryService.list().stream().map(y-> {

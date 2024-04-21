@@ -2,7 +2,7 @@ package pe.edu.upc.musictooltf.ServiceImplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.musictooltf.Entities.User;
+import pe.edu.upc.musictooltf.Entities.Users;
 import pe.edu.upc.musictooltf.Repositories.IUserRepository;
 import pe.edu.upc.musictooltf.Services.IUserService;
 
@@ -14,12 +14,12 @@ public class UserServiceImplement implements IUserService {
     private IUserRepository uR;
 
     @Override
-    public void insert(User user) {
+    public void insert(Users user) {
         uR.save(user);
     }
 
     @Override
-    public List<User> list() {
+    public List<Users> list() {
         return uR.findAll();
     }
 
@@ -29,7 +29,7 @@ public class UserServiceImplement implements IUserService {
     }
 
     @Override
-    public User listId(Long idUsuario) {
-        return uR.findById(idUsuario).orElse(new User());
+    public Users listId(Long idUsuario) {
+        return uR.findById(idUsuario).orElse(new Users());
     }
 }
