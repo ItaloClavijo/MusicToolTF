@@ -17,17 +17,17 @@ public class UserController {
     @Autowired
     private IUserService uS;
 
-//    @Autowired
-//    private PasswordEncoder passwordEncoder;
-//
-//    @PostMapping
-//    public void registrar(@RequestBody UserDTO dto) {
-//        ModelMapper m = new ModelMapper();
-//        User u = m.map(dto, User.class);
-//        String encodedPassword = passwordEncoder.encode(u.getPassword());
-//        u.setPassword(encodedPassword);
-//        uS.insert(u);
-//    }
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @PostMapping
+    public void registrar(@RequestBody UserDTO dto) {
+        ModelMapper m = new ModelMapper();
+        User u = m.map(dto, User.class);
+        String encodedPassword = passwordEncoder.encode(u.getUserPassword());
+        u.setUserPassword(encodedPassword);
+        uS.insert(u);
+    }
 
     @PutMapping
     public void modificar(@RequestBody UserDTO dto) {
