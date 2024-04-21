@@ -18,9 +18,9 @@ public class User implements Serializable {
     private String userPassword;
     private Boolean userEnabled;
 
-//    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-//    @JoinColumn(name = "user_id")
-//    private List<Role> roles;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private List<Role> roles;
 
     public User() {
     }
@@ -62,5 +62,13 @@ public class User implements Serializable {
 
     public void setUserEnabled(Boolean userEnabled) {
         this.userEnabled = userEnabled;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
