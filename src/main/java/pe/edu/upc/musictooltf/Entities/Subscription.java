@@ -20,11 +20,16 @@ public class Subscription {
     @Column(name = "date", nullable = false)
     private LocalDate dateSubscription;
 
-    public Subscription(Integer idSubscription, String stateSubscription, Double totalSubscription, LocalDate dateSubscription) {
+    @ManyToOne
+    @JoinColumn(name = "plan_id")
+    private Plan planId;
+
+    public Subscription(Integer idSubscription, String stateSubscription, Double totalSubscription, LocalDate dateSubscription, Plan planId) {
         this.idSubscription = idSubscription;
         this.stateSubscription = stateSubscription;
         this.totalSubscription = totalSubscription;
         this.dateSubscription = dateSubscription;
+        this.planId = planId;
     }
 
     public Subscription() {
@@ -60,5 +65,13 @@ public class Subscription {
 
     public void setDateSubscription(LocalDate dateSubscription) {
         this.dateSubscription = dateSubscription;
+    }
+
+    public Plan getPlanId() {
+        return planId;
+    }
+
+    public void setPlanId(Plan planId) {
+        this.planId = planId;
     }
 }

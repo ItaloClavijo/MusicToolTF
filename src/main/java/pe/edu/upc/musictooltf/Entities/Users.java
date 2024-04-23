@@ -18,18 +18,26 @@ public class Users implements Serializable {
     private String password;
     private Boolean enabled;
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_idr")
     private List<Role> roles;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_idp")
+    private Plan plan;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_idl")
+    private List<Library> library;
 
     public Users() {
     }
 
-    public Users(Long id, String userName, String userPassword, Boolean userEnabled, List<Role> role) {
+    public Users(Long id, String userName, String userPassword, Boolean userEnabled, List<Role> role, Plan plan, List<Library> library) {
         this.id = id;
         this.username = userName;
         this.password = userPassword;
         this.enabled = userEnabled;
         this.roles = role;
+        this.plan = plan;
+        this.library = library;
     }
 
     public Long getId() {
@@ -71,4 +79,22 @@ public class Users implements Serializable {
     public void setRole(List<Role> role) {
         this.roles = role;
     }
+
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
+
+    public List<Library> getLibrary() {
+        return library;
+    }
+
+    public void setLibrary(List<Library> library) {
+        this.library = library;
+    }
+
+
 }

@@ -18,11 +18,16 @@ public class Artist {
     @Column(name = "email", nullable = false, length = 100)
     private String emailArtist;
 
-    public Artist(Integer idArtist, String nameArtist, String descriptionArtist, String emailArtist) {
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "artist_id")
+    private Content contentId;
+
+    public Artist(Integer idArtist, String nameArtist, String descriptionArtist, String emailArtist, Content contentId) {
         this.idArtist = idArtist;
         this.nameArtist = nameArtist;
         this.descriptionArtist = descriptionArtist;
         this.emailArtist = emailArtist;
+        this.contentId = contentId;
     }
 
     public Artist() {
@@ -58,5 +63,13 @@ public class Artist {
 
     public void setEmailArtist(String emailArtist) {
         this.emailArtist = emailArtist;
+    }
+
+    public Content getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(Content contentId) {
+        this.contentId = contentId;
     }
 }
