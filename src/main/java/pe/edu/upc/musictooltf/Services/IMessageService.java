@@ -9,9 +9,4 @@ public interface IMessageService {
     public List<Message> MESSAGE_LIST();
     public void Delete(Integer Id);
     public Message findById(Integer Id);
-
-    void save(Message c);
-
-    void delete(Integer id);
-
 }

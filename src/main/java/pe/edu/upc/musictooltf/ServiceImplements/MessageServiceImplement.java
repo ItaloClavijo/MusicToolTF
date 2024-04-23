@@ -17,31 +17,21 @@ public class MessageServiceImplement implements IMessageService {
 
     @Override
     public Message create(Message message) {
-        return null;
+        return messageRepository.save(message);
     }
 
     @Override
     public List<Message> MESSAGE_LIST() {
-        return null;
+        return messageRepository.findAll();
     }
 
     @Override
     public void Delete(Integer Id) {
-
+        messageRepository.deleteById(Id);
     }
 
     @Override
     public Message findById(Integer Id) {
-        return null;
-    }
-
-    @Override
-    public void save(Message c) {
-
-    }
-
-    @Override
-    public void delete(Integer id) {
-
+        return messageRepository.findById(Id).orElseThrow();
     }
 }
