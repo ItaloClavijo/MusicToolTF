@@ -5,6 +5,6 @@ import org.springframework.stereotype.Repository;
 import pe.edu.upc.musictooltf.Entities.Chat;
 
 @Repository
-public class IChatRepository {
+public interface IChatRepository extends JpaRepository<Chat,Integer> {
 
 }
