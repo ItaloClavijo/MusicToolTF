@@ -2,6 +2,8 @@ package pe.edu.upc.musictooltf.Entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "Library")
 public class Library {
@@ -19,11 +21,21 @@ public class Library {
     @Column(name = "libraryDescription",nullable = false, length = 100)
     private String libraryDescription;
 
-    public Library(Integer id, Boolean libraryAvailable, String libraryName, String libraryDescription) {
+    @ManyToOne
+    @JoinColumn(name = "user_idl")
+    private Users usersId;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "content_id")
+    private List<Content> contentId;
+
+    public Library(Integer id, Boolean libraryAvailable, String libraryName, String libraryDescription, Users usersId, List<Content> contentId) {
         this.id = id;
         this.libraryAvailable = libraryAvailable;
         this.libraryName = libraryName;
         this.libraryDescription = libraryDescription;
+        this.usersId = usersId;
+        this.contentId = contentId;
     }
 
     public Library() {
@@ -59,5 +71,21 @@ public class Library {
 
     public void setLibraryDescription(String libraryDescription) {
         this.libraryDescription = libraryDescription;
+    }
+
+    public Users getUsersId() {
+        return usersId;
+    }
+
+    public void setUsersId(Users usersId) {
+        this.usersId = usersId;
+    }
+
+    public List<Content> getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(List<Content> contentId) {
+        this.contentId = contentId;
     }
 }

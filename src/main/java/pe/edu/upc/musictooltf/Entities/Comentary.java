@@ -19,8 +19,7 @@ public class Comentary {
     @Column(name = "date", nullable = false)
     private LocalDate comentaryDate;
     @ManyToOne
-    @JoinColumn(name = "contentId")
-
+    @JoinColumn(name = "content_idc")
     private Content contentId;
 
     public Comentary(Integer id, String comentatyComent, LocalDate comentaryDate, Content contentId) {

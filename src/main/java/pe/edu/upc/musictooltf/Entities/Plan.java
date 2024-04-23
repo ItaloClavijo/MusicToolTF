@@ -3,6 +3,7 @@ package pe.edu.upc.musictooltf.Entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="Plan")
@@ -26,13 +27,23 @@ public class Plan {
     @Column(name = "finalDate", nullable = false)
     private LocalDate planFinalDate;
 
-    public Plan(Integer id, String planName, Double planPrice, String planDescription, LocalDate planStartDate, LocalDate planFinalDate) {
+    @OneToOne
+    @JoinColumn(name = "user_idp")
+    private Users usersId;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "plan_id")
+    private List<Subscription> subscription;
+
+    public Plan(Integer id, String planName, Double planPrice, String planDescription, LocalDate planStartDate, LocalDate planFinalDate, Users usersId, List<Subscription> subscription) {
         this.id = id;
         this.planName = planName;
         this.planPrice = planPrice;
         this.planDescription = planDescription;
         this.planStartDate = planStartDate;
         this.planFinalDate = planFinalDate;
+        this.usersId = usersId;
+        this.subscription = subscription;
     }
 
     public Plan() {
@@ -84,5 +95,21 @@ public class Plan {
 
     public void setPlanFinalDate(LocalDate planFinalDate) {
         this.planFinalDate = planFinalDate;
+    }
+
+    public Users getUsersId() {
+        return usersId;
+    }
+
+    public void setUsersId(Users usersId) {
+        this.usersId = usersId;
+    }
+
+    public List<Subscription> getSubscription() {
+        return subscription;
+    }
+
+    public void setSubscription(List<Subscription> subscription) {
+        this.subscription = subscription;
     }
 }
