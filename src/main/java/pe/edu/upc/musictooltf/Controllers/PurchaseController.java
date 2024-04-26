@@ -16,10 +16,8 @@ public class PurchaseController {
     @Autowired
     private IPurchaseService purchaseService;
     @PostMapping
-    public void insert(@RequestBody PurchaseDTO purchaseDTO) {
-        ModelMapper m = new ModelMapper();
-        Purchase purchase = m.map(purchaseDTO, Purchase.class);
-        purchaseService.insert(purchase);
+    public void insert(@RequestBody List<Integer> contentIds) {
+        purchaseService.create(contentIds);
     }
 
     @DeleteMapping("/{id}")

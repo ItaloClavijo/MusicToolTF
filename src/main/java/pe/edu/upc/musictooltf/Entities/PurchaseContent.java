@@ -12,11 +12,15 @@ public class PurchaseContent {
     //precio compra de contenido
     @Column(name ="price")
     private Float purchaseContentPrice;
-    @Column(name ="idContent")
-    private Integer idContent;
+
     @ManyToOne
-    @JoinColumn(name = "purchaseId")
+    @JoinColumn(name = "content_id")
+    private Content contentId;
+
+    @ManyToOne
+    @JoinColumn(name = "purchase_id")
     private Purchase purchaseId;
+
     //descargas disponibles
     @Column(name ="availableDownloads")
     private int purchaseContentAvailableDownloads;
@@ -24,20 +28,20 @@ public class PurchaseContent {
     public PurchaseContent() {
     }
 
-    public PurchaseContent(Integer idPurchaseContent, Float purchaseContentPrice, Integer idContent, Purchase purchaseId, int purchaseContentAvailableDownloads) {
+    public PurchaseContent(Integer idPurchaseContent, Float purchaseContentPrice, Content idContent, Purchase purchaseId, int purchaseContentAvailableDownloads) {
         this.idPurchaseContent = idPurchaseContent;
         this.purchaseContentPrice = purchaseContentPrice;
-        this.idContent = idContent;
+        this.contentId = idContent;
         this.purchaseId = purchaseId;
         this.purchaseContentAvailableDownloads = purchaseContentAvailableDownloads;
     }
 
-    public Integer getIdContent() {
-        return idContent;
+    public Content getIdContent() {
+        return contentId;
     }
 
-    public void setIdContent(Integer idContent) {
-        this.idContent = idContent;
+    public void setIdContent(Content idContent) {
+        this.contentId = idContent;
     }
 
     public Integer getIdPurchaseContent() {
