@@ -1,15 +1,16 @@
 package pe.edu.upc.musictooltf.DTOs;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import pe.edu.upc.musictooltf.Entities.Users;
+
 import java.time.LocalDate;
 
 public class ChatDTO {
     private Integer idChat;
 
+    private Users user1id;
 
-    private String chatContent;
-
-    private LocalDate chatDate;
-
-    private int contentId;
+    private Users user2id;
 
     public Integer getIdChat() {
         return idChat;
@@ -19,27 +20,19 @@ public class ChatDTO {
         this.idChat = idChat;
     }
 
-    public String getChatContent() {
-        return chatContent;
+    public Users getUser1id() {
+        return user1id;
     }
 
-    public void setChatContent(String chatContent) {
-        this.chatContent = chatContent;
+    public void setUser1id(Users user1id) {
+        this.user1id = user1id;
     }
 
-    public LocalDate getChatDate() {
-        return chatDate;
+    public Users getUser2id() {
+        return user2id;
     }
 
-    public void setChatDate(LocalDate chatDate) {
-        this.chatDate = chatDate;
-    }
-
-    public int getContentId() {
-        return contentId;
-    }
-
-    public void setContentId(int contentId) {
-        this.contentId = contentId;
+    public void setUser2id(Users user2id) {
+        this.user2id = user2id;
     }
 }
