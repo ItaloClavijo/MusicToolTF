@@ -1,17 +1,25 @@
 package pe.edu.upc.musictooltf.DTOs;
 
-public class  UserDTO {
-    private Long id;
-    private String userName;
-    private String userPassword;
-    private Boolean userEnabled;
+import jakarta.persistence.Column;
 
-    public UserDTO(Long id, String userName, String userPassword, Boolean userEnabled) {
+public class  UserDTO {
+
+    private Long id;
+    private String username;
+    private String password;
+    private Boolean enabled;
+    private String email;
+    private String description;
+
+    public UserDTO(Long id, String username, String password, Boolean enabled, String email, String description) {
         this.id = id;
-        this.userName = userName;
-        this.userPassword = userPassword;
-        this.userEnabled = userEnabled;
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.email = email;
+        this.description = description;
     }
+
     public UserDTO() {
     }
 
@@ -23,27 +31,43 @@ public class  UserDTO {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getUserPassword() {
-        return userPassword;
+    public String getPassword() {
+        return password;
     }
 
-    public void setUserPassword(String userPassword) {
-        this.userPassword = userPassword;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
-    public Boolean getUserEnabled() {
-        return userEnabled;
+    public Boolean getEnabled() {
+        return enabled;
     }
 
-    public void setUserEnabled(Boolean userEnabled) {
-        this.userEnabled = userEnabled;
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }

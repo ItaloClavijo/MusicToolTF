@@ -1,6 +1,9 @@
 package pe.edu.upc.musictooltf.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Content")
@@ -22,8 +25,17 @@ public class Content {
     private String fileContent;
 
     @ManyToOne
-    @JoinColumn(name = "libraryId")
-    private Library library;
+    @JoinColumn(name = "library_id")
+    private Library libraryId;
+
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
+    private Artist artist_id;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "content_id")
+    private List<Comentary> comentaries;
 
     public Content(Integer idContent, String titleContent, String descriptionContent, Double priceContent, Boolean freeContent, String typeContent, String fileContent, Library library) {
         this.idContent = idContent;
@@ -33,7 +45,7 @@ public class Content {
         this.freeContent = freeContent;
         this.typeContent = typeContent;
         this.fileContent = fileContent;
-        this.library = library;
+        this.libraryId = library;
     }
 
     public Content() {
@@ -96,10 +108,10 @@ public class Content {
     }
 
     public Library getLibrary() {
-        return library;
+        return libraryId;
     }
 
     public void setLibrary(Library library) {
-        this.library = library;
+        this.libraryId = library;
     }
 }
