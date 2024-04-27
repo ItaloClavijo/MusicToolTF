@@ -3,6 +3,8 @@ package pe.edu.upc.musictooltf.Entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name="Purchase")
@@ -12,29 +14,39 @@ public class Purchase {
     private Integer idPurchase;
     @Column(name="date", nullable = false)
     //es mejor porque se puede hacer reporte
-    private LocalDate purchaseDate;
+    private LocalDateTime purchaseDate;
     @Column(name="paymentStatus", nullable = false)
     //Estado de compra
-    private int purchasePaymentStatus;
+    private String purchasePaymentStatus;
+
     @Column(name="purchaseTotal", nullable = false)
     private Float purchaseTotal;
-    @Column(name="planesId", nullable = false)
-    private int planesId;
-    /*
-    @ManyToOne
-    @JoinColumn(name = "userID")
-    private  User userId;
-     */
+
+    @OneToMany(mappedBy = "purchaseId", cascade = CascadeType.ALL)
+    private List<PurchaseContent> items;
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private Users usersId;
 
     public Purchase() {
     }
 
-    public Purchase(Integer idPurchase, LocalDate purchaseDate, int purchasePaymentStatus, Float purchaseTotal, int planesId) {
+    public Purchase(Integer idPurchase, LocalDateTime purchaseDate, String purchasePaymentStatus, Float purchaseTotal, List<PurchaseContent> items, Users usersId) {
         this.idPurchase = idPurchase;
         this.purchaseDate = purchaseDate;
         this.purchasePaymentStatus = purchasePaymentStatus;
         this.purchaseTotal = purchaseTotal;
-        this.planesId = planesId;
+        this.items = items;
+        this.usersId = usersId;
+    }
+
+    public Users getUsersId() {
+        return usersId;
+    }
+
+    public void setUsersId(Users usersId) {
+        this.usersId = usersId;
     }
 
     public Integer getIdPurchase() {
@@ -45,19 +57,19 @@ public class Purchase {
         this.idPurchase = id;
     }
 
-    public LocalDate getPurchaseDate() {
+    public LocalDateTime getPurchaseDate() {
         return purchaseDate;
     }
 
-    public void setPurchaseDate(LocalDate purchaseDate) {
+    public void setPurchaseDate(LocalDateTime purchaseDate) {
         this.purchaseDate = purchaseDate;
     }
 
-    public int getPurchasePaymentStatus() {
+    public String getPurchasePaymentStatus() {
         return purchasePaymentStatus;
     }
 
-    public void setPurchasePaymentStatus(int purchasePaymentStatus) {
+    public void setPurchasePaymentStatus(String purchasePaymentStatus) {
         this.purchasePaymentStatus = purchasePaymentStatus;
     }
 
@@ -69,11 +81,11 @@ public class Purchase {
         this.purchaseTotal = purchaseTotal;
     }
 
-    public int getPlanesId() {
-        return planesId;
+    public List<PurchaseContent> getItems() {
+        return items;
     }
 
-    public void setPlanesId(int planesId) {
-        this.planesId = planesId;
+    public void setItems(List<PurchaseContent> items) {
+        this.items = items;
     }
 }

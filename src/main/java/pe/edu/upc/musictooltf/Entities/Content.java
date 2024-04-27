@@ -1,6 +1,9 @@
 package pe.edu.upc.musictooltf.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Content")
@@ -22,10 +25,20 @@ public class Content {
     private String fileContent;
 
     @ManyToOne
-    @JoinColumn(name = "libraryId")
-    private Library library;
+    @JoinColumn(name = "library_id")
+    private Library libraryId;
 
-    public Content(Integer idContent, String titleContent, String descriptionContent, Double priceContent, Boolean freeContent, String typeContent, String fileContent, Library library) {
+    @ManyToOne
+    @JoinColumn(name = "artist_id")
+    private Artist artist_id;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "content_id")
+    private List<Comentary> comentaries;
+
+
+    public Content(Integer idContent, String titleContent, String descriptionContent, Double priceContent, Boolean freeContent, String typeContent, String fileContent, Library libraryId, Artist artist_id, List<Comentary> comentaries) {
         this.idContent = idContent;
         this.titleContent = titleContent;
         this.descriptionContent = descriptionContent;
@@ -33,7 +46,9 @@ public class Content {
         this.freeContent = freeContent;
         this.typeContent = typeContent;
         this.fileContent = fileContent;
-        this.library = library;
+        this.libraryId = libraryId;
+        this.artist_id = artist_id;
+        this.comentaries = comentaries;
     }
 
     public Content() {
@@ -95,11 +110,27 @@ public class Content {
         this.fileContent = fileContent;
     }
 
-    public Library getLibrary() {
-        return library;
+    public Library getLibraryId() {
+        return libraryId;
     }
 
-    public void setLibrary(Library library) {
-        this.library = library;
+    public void setLibraryId(Library libraryId) {
+        this.libraryId = libraryId;
+    }
+
+    public Artist getArtist_id() {
+        return artist_id;
+    }
+
+    public void setArtist_id(Artist artist_id) {
+        this.artist_id = artist_id;
+    }
+
+    public List<Comentary> getComentaries() {
+        return comentaries;
+    }
+
+    public void setComentaries(List<Comentary> comentaries) {
+        this.comentaries = comentaries;
     }
 }

@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.musictooltf.DTOs.UserDTO;
-import pe.edu.upc.musictooltf.Entities.User;
+import pe.edu.upc.musictooltf.Entities.Users;
 import pe.edu.upc.musictooltf.Services.IUserService;
 
 import java.util.List;
@@ -23,17 +23,19 @@ public class UserController {
     @PostMapping
     public void registrar(@RequestBody UserDTO dto) {
         ModelMapper m = new ModelMapper();
-        User u = m.map(dto, User.class);
-        String encodedPassword = passwordEncoder.encode(u.getUserPassword());
-        u.setUserPassword(encodedPassword);
+        Users u = m.map(dto, Users.class);
+        String encodedPassword = passwordEncoder.encode(u.getPassword());
+        u.setPassword(encodedPassword);
         uS.insert(u);
     }
 
-    @PutMapping
-    public void modificar(@RequestBody UserDTO dto) {
+    @PutMapping("/{id}")
+    public void modificar(@PathVariable Long id, @RequestBody UserDTO dto) {
         ModelMapper m = new ModelMapper();
-        User u = m.map(dto, User.class);
-        uS.insert(u);
+        Users u = m.map(dto, Users.class);
+        String encodedPassword = passwordEncoder.encode(u.getPassword());
+        u.setPassword(encodedPassword);
+        uS.update(id,u);
     }
 
     @DeleteMapping("/{id}")

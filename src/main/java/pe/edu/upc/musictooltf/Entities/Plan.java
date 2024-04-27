@@ -1,8 +1,10 @@
 package pe.edu.upc.musictooltf.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name="Plan")
@@ -20,19 +22,18 @@ public class Plan {
     @Column(name = "description", nullable = false, length = 250)
     private String planDescription;
 
-    @Column(name = "startDate", nullable = false)
-    private LocalDate planStartDate;
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "plan_id")
+    private List<Subscription> subs;
 
-    @Column(name = "finalDate", nullable = false)
-    private LocalDate planFinalDate;
 
-    public Plan(Integer id, String planName, Double planPrice, String planDescription, LocalDate planStartDate, LocalDate planFinalDate) {
+    public Plan(Integer id, String planName, Double planPrice, String planDescription, List<Subscription> subs) {
         this.id = id;
         this.planName = planName;
         this.planPrice = planPrice;
         this.planDescription = planDescription;
-        this.planStartDate = planStartDate;
-        this.planFinalDate = planFinalDate;
+        this.subs = subs;
     }
 
     public Plan() {
@@ -70,19 +71,11 @@ public class Plan {
         this.planDescription = planDescription;
     }
 
-    public LocalDate getPlanStartDate() {
-        return planStartDate;
+    public List<Subscription> getSubs() {
+        return subs;
     }
 
-    public void setPlanStartDate(LocalDate planStartDate) {
-        this.planStartDate = planStartDate;
-    }
-
-    public LocalDate getPlanFinalDate() {
-        return planFinalDate;
-    }
-
-    public void setPlanFinalDate(LocalDate planFinalDate) {
-        this.planFinalDate = planFinalDate;
+    public void setSubs(List<Subscription> subs) {
+        this.subs = subs;
     }
 }

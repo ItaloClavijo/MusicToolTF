@@ -1,6 +1,9 @@
 package pe.edu.upc.musictooltf.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Library")
@@ -10,20 +13,31 @@ public class Library {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "available",nullable = false)
+    @Column(name = "libraryAvailable",nullable = false)
     private Boolean libraryAvailable;
 
-    @Column(name = "name",nullable = false, length = 100)
+    @Column(name = "libraryName",nullable = false, length = 100)
     private String libraryName;
 
-    @Column(name = "description",nullable = false, length = 100)
+    @Column(name = "libraryDescription",nullable = false, length = 100)
     private String libraryDescription;
 
-    public Library(Integer id, Boolean libraryAvailable, String libraryName, String libraryDescription) {
+    @OneToOne
+    @JoinColumn(name = "user_id")
+    private Users usersId;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "library_id")
+    private List<Content> contents;
+
+    public Library(Integer id, Boolean libraryAvailable, String libraryName, String libraryDescription, Users usersId, List<Content> contents) {
         this.id = id;
         this.libraryAvailable = libraryAvailable;
         this.libraryName = libraryName;
         this.libraryDescription = libraryDescription;
+        this.usersId = usersId;
+        this.contents = contents;
     }
 
     public Library() {
@@ -59,5 +73,21 @@ public class Library {
 
     public void setLibraryDescription(String libraryDescription) {
         this.libraryDescription = libraryDescription;
+    }
+
+    public Users getUsersId() {
+        return usersId;
+    }
+
+    public void setUsersId(Users usersId) {
+        this.usersId = usersId;
+    }
+
+    public List<Content> getContents() {
+        return contents;
+    }
+
+    public void setContents(List<Content> contents) {
+        this.contents = contents;
     }
 }

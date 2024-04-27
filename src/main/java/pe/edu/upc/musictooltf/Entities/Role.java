@@ -16,17 +16,17 @@ public class Role {
     private String roleDescription;
 
     @ManyToOne
-    @JoinColumn(name = "userId")
-    private User userId;
+    @JoinColumn(name = "user_id")
+    private Users usersId;
 
     public Role() {
     }
 
-    public Role(Integer id, String roleName, String roleDescription, User userId) {
+    public Role(Integer id, String roleName, String roleDescription, Users usersId) {
         this.id = id;
         this.roleName = roleName;
         this.roleDescription = roleDescription;
-        this.userId = userId;
+        this.usersId = usersId;
     }
 
     public Integer getId() {
@@ -53,12 +53,11 @@ public class Role {
         this.roleDescription = roleDescription;
     }
 
-    public User getUserId() {
-        return userId;
+    public Users getUsersId() {
+        return usersId;
     }
 
-    public void setUserId(User userId) {
-        this.userId = userId;
+    public void setUsersId(Users usersId) {
+        this.usersId = usersId;
     }
-
 }
