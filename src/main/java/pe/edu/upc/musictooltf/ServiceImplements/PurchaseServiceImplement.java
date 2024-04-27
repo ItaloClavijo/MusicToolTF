@@ -12,6 +12,7 @@ import pe.edu.upc.musictooltf.Repositories.IPurchaseRepository;
 import pe.edu.upc.musictooltf.Services.IPurchaseService;
 import pe.edu.upc.musictooltf.Exceptions.ResourceNotFoundException;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +26,7 @@ public class PurchaseServiceImplement implements IPurchaseService {
     private IContentRepository iContentRepository;
 
     @Override
-    public void create(List<Integer> contentIds) {
+    public void create(List<Integer> idPurchase) {
 
         Purchase purchase = new Purchase();
         purchase.setPurchaseDate(LocalDateTime.now());
@@ -35,7 +36,7 @@ public class PurchaseServiceImplement implements IPurchaseService {
         float total = 0;
         List<PurchaseContent> items = new ArrayList<>();
 
-        for (int contentId : contentIds) {
+        for (int contentId : idPurchase) {
             Content content = iContentRepository
                     .findById(contentId)
                     .orElseThrow(ResourceNotFoundException::new);
@@ -84,6 +85,11 @@ public class PurchaseServiceImplement implements IPurchaseService {
 
         purchase.setPurchasePaymentStatus("PAID");
         return purchaseRepository.save(purchase);
+    }
+
+    @Override
+    public List<String[]> findUserNameWithTotalcompraByWithDate(LocalDate fechaInicio, LocalDate fechaFin) {
+        return purchaseRepository.findUserNameWithTotalcompraByWithDate(fechaInicio, fechaFin);
     }
 
     @Override
