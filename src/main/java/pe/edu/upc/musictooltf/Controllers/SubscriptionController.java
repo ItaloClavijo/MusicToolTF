@@ -3,6 +3,7 @@ package pe.edu.upc.musictooltf.Controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.musictooltf.DTOs.SubscriptionDTO;
@@ -28,11 +29,13 @@ public class SubscriptionController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{user_id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void save(@RequestBody Integer plan_id, @PathVariable Long user_id){
         subscriptionService.insert(plan_id,user_id);
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<SubscriptionDTO> list(){
         return subscriptionService.list().stream().map(y-> {
             ModelMapper m = new ModelMapper();
@@ -41,11 +44,13 @@ public class SubscriptionController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void delete(@PathVariable("id") Integer id) {
         subscriptionService.delete(id);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public SubscriptionDTO listId(@PathVariable("id") Integer id){
         ModelMapper m=new ModelMapper();
         SubscriptionDTO subscriptionDTO = m.map(subscriptionService.findById(id),SubscriptionDTO.class);

@@ -3,6 +3,7 @@ package pe.edu.upc.musictooltf.Controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.musictooltf.DTOs.ArtistDTO;
@@ -21,6 +22,7 @@ public class ArtistController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public Artist save(@RequestBody @Validated ArtistDTO artistDTO){
         ModelMapper m = new ModelMapper();
         Artist a = m.map(artistDTO,Artist.class);
@@ -28,6 +30,7 @@ public class ArtistController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public List<ArtistDTO> list(){
         return artistService.list().stream().map(y-> {
             ModelMapper m = new ModelMapper();
@@ -36,11 +39,13 @@ public class ArtistController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public void delete(@PathVariable("id") Integer id) {
         artistService.delete(id);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public ArtistDTO listId(@PathVariable("id") Integer id){
         ModelMapper m=new ModelMapper();
         ArtistDTO artistDTO = m.map(artistService.findById(id),ArtistDTO.class);
