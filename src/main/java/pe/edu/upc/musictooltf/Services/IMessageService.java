@@ -8,5 +8,5 @@ public interface IMessageService {
     public Message create(Message message);
     public List<Message> MESSAGE_LIST();
     public void Delete(Integer Id);
-    public Message findById(Integer Id);
+
 }

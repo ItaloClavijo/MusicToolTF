@@ -2,6 +2,8 @@ package pe.edu.upc.musictooltf.Entities;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "Message")
 public class Message {
@@ -9,15 +11,20 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idMessage;
-    @Column(name = "userId")
-    private int usersId;
+
+    @Column(name = "descriptionMessage",nullable = false,length = 500)
+    private String descriptionMessage ;
+
+    @Column(name = "dateMEssage",nullable = false)
+    private LocalDate dateMessage;
 
     public Message() {
     }
 
-    public Message(Integer idMessage, int usersId) {
+    public Message(Integer idMessage, String descriptionMessage, LocalDate dateMessage) {
         this.idMessage = idMessage;
-        this.usersId = usersId;
+        this.descriptionMessage = descriptionMessage;
+        this.dateMessage = dateMessage;
     }
 
     public Integer getIdMessage() {
@@ -28,11 +35,19 @@ public class Message {
         this.idMessage = idMessage;
     }
 
-    public int getUsersId() {
-        return usersId;
+    public String getDescriptionMessage() {
+        return descriptionMessage;
     }
 
-    public void setUsersId(int usersId) {
-        this.usersId = usersId;
+    public void setDescriptionMessage(String descriptionMessage) {
+        this.descriptionMessage = descriptionMessage;
+    }
+
+    public LocalDate getDateMessage() {
+        return dateMessage;
+    }
+
+    public void setDateMessage(LocalDate dateMessage) {
+        this.dateMessage = dateMessage;
     }
 }
