@@ -1,31 +1,20 @@
 package pe.edu.upc.musictooltf.DTOs;
 
-import pe.edu.upc.musictooltf.Entities.Users;
-
 import java.time.LocalDate;
 
 public class PurchaseDTO {
-    private Integer idPurchase;
+    private Integer id;
     private LocalDate purchaseDate;
     private int purchasePaymentStatus;
     private Float purchaseTotal;
     private int planesId;
-    private Users usersId;
 
-    public Users getUsersId() {
-        return usersId;
+    public Integer getId() {
+        return id;
     }
 
-    public void setUsersId(Users usersId) {
-        this.usersId = usersId;
-    }
-
-    public Integer getIdPurchase() {
-        return idPurchase;
-    }
-
-    public void setIdPurchase(Integer idPurchase) {
-        this.idPurchase = idPurchase;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public LocalDate getPurchaseDate() {

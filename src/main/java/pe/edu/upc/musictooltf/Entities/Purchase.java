@@ -25,28 +25,21 @@ public class Purchase {
     @OneToMany(mappedBy = "purchaseId", cascade = CascadeType.ALL)
     private List<PurchaseContent> items;
 
-    @OneToOne
-    @JoinColumn(name = "user_id")
-    private Users usersId;
+    /*
+    @ManyToOne
+    @JoinColumn(name = "userID")
+    private  User userId;
+     */
 
     public Purchase() {
     }
 
-    public Purchase(Integer idPurchase, LocalDateTime purchaseDate, String purchasePaymentStatus, Float purchaseTotal, List<PurchaseContent> items, Users usersId) {
+    public Purchase(Integer idPurchase, LocalDateTime purchaseDate, String purchasePaymentStatus, Float purchaseTotal, List<PurchaseContent> items) {
         this.idPurchase = idPurchase;
         this.purchaseDate = purchaseDate;
         this.purchasePaymentStatus = purchasePaymentStatus;
         this.purchaseTotal = purchaseTotal;
         this.items = items;
-        this.usersId = usersId;
-    }
-
-    public Users getUsersId() {
-        return usersId;
-    }
-
-    public void setUsersId(Users usersId) {
-        this.usersId = usersId;
     }
 
     public Integer getIdPurchase() {
