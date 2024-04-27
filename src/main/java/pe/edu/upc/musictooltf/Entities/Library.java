@@ -22,7 +22,6 @@ public class Library {
     @Column(name = "libraryDescription",nullable = false, length = 100)
     private String libraryDescription;
 
-
     @OneToOne
     @JoinColumn(name = "user_id")
     private Users usersId;

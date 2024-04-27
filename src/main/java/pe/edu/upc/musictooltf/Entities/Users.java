@@ -31,14 +31,9 @@ public class Users implements Serializable {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_idr")
+    @JoinColumn(name = "user_id")
     private List<Role> roles;
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_idp")
-    private Plan plan;
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_idl")
-    private List<Library> library;
+
 
     public Users() {
     }
@@ -52,6 +47,7 @@ public class Users implements Serializable {
         this.description = description;
         this.registerDate = registerDate;
         this.roles = roles;
+    }
 
     public Long getId() {
         return id;
@@ -59,38 +55,6 @@ public class Users implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getUserName() {
-        return username;
-    }
-
-    public void setUserName(String userName) {
-        this.username = userName;
-    }
-
-    public String getUserPassword() {
-        return password;
-    }
-
-    public void setUserPassword(String userPassword) {
-        this.password = userPassword;
-    }
-
-    public Boolean getUserEnabled() {
-        return enabled;
-    }
-
-    public void setUserEnabled(Boolean userEnabled) {
-        this.enabled = userEnabled;
-    }
-
-    public List<Role> getRole() {
-        return roles;
-    }
-
-    public void setRole(List<Role> role) {
-        this.roles = role;
     }
 
     public String getUsername() {

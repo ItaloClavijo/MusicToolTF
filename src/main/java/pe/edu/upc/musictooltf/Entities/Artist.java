@@ -27,13 +27,12 @@ public class Artist {
     @JoinColumn(name = "artist_id")
     private List<Content> contents;
 
-    public Artist(Integer idArtist, String nameArtist, String descriptionArtist, String emailArtist) {
-
+    public Artist(Integer idArtist, String nameArtist, String descriptionArtist, String emailArtist, List<Content> contents) {
         this.idArtist = idArtist;
         this.nameArtist = nameArtist;
         this.descriptionArtist = descriptionArtist;
         this.emailArtist = emailArtist;
-        this.contentId = contentId;
+        this.contents = contents;
     }
 
     public Artist() {
@@ -71,11 +70,11 @@ public class Artist {
         this.emailArtist = emailArtist;
     }
 
-    public Content getContentId() {
-        return contentId;
+    public List<Content> getContents() {
+        return contents;
     }
 
-    public void setContentId(Content contentId) {
-        this.contentId = contentId;
+    public void setContents(List<Content> contents) {
+        this.contents = contents;
     }
 }

@@ -32,6 +32,20 @@ public class CheckoutService {
         return new PaypalOrderResponse(paypalUrl);
     }
 
+    public PaypalOrderResponse createPaypalPaymentSubUrl(Integer subId, String returnUrl, String cancelUrl) {
+        OrderResponse orderResponse = paypalService.createOrderSub(subId, returnUrl, cancelUrl);
+
+        String paypalUrl = orderResponse
+                .getLinks()
+                .stream()
+                .filter(link -> link.getRel().equals("approve"))
+                .findFirst()
+                .orElseThrow(RuntimeException::new)
+                .getHref();
+
+        return new PaypalOrderResponse(paypalUrl);
+    }
+
     public PaypalCaptureResponse capturePaypalPayment(String orderId) {
         OrderCaptureResponse orderCaptureResponse = paypalService.captureOrder(orderId);
         boolean completed = orderCaptureResponse.getStatus().equals("COMPLETED");

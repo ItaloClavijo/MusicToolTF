@@ -25,6 +25,15 @@ public class PaypalCheckoutController {
        return checkoutService.createPaypalPaymentUrl(purchaseId,returnUrl,cancelUrl);
     }
 
+    @PostMapping("/paypal/create/sub")
+    public PaypalOrderResponse createPaypalSubOrder(
+            @RequestParam Integer subId,
+            @RequestParam String returnUrl,
+            @RequestParam String cancelUrl
+    ) {
+        return checkoutService.createPaypalPaymentSubUrl(subId,returnUrl,cancelUrl);
+    }
+
     @PostMapping("/paypal/capture")
     public PaypalCaptureResponse capturePaypalOrder(@RequestParam String orderId) {
         return checkoutService.capturePaypalPayment(orderId);

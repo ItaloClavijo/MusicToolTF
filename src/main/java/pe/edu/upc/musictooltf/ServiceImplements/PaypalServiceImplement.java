@@ -13,10 +13,12 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestClient;
 import pe.edu.upc.musictooltf.DTOs.paypalDTO.*;
 import pe.edu.upc.musictooltf.Entities.Purchase;
+import pe.edu.upc.musictooltf.Entities.Subscription;
 import pe.edu.upc.musictooltf.Repositories.IPurchaseRepository;
 import java.util.Base64;
 import java.util.Collections;
 import pe.edu.upc.musictooltf.Exceptions.ResourceNotFoundException;
+import pe.edu.upc.musictooltf.Repositories.ISubscriptionRepository;
 import pe.edu.upc.musictooltf.Services.PaypalService;
 
 @RequiredArgsConstructor
@@ -34,6 +36,10 @@ public class PaypalServiceImplement implements PaypalService {
 
     @NonNull
     private IPurchaseRepository purchaseRepository;
+
+    @NonNull
+    private ISubscriptionRepository subscriptionRepository;
+
 
     private RestClient paypalClient;
 
@@ -75,6 +81,42 @@ public class PaypalServiceImplement implements PaypalService {
 
         PurchaseUnit purchaseUnit = new PurchaseUnit();
         purchaseUnit.setReferenceId(purchase.getIdPurchase().toString());
+        purchaseUnit.setAmount(amount);
+
+        orderRequest.setPurchaseUnits(Collections.singletonList(purchaseUnit));
+
+        ApplicationContext applicationContext = ApplicationContext
+                .builder()
+                .brandName("Musictool")
+                .returnURL(returnUrl)
+                .cancelURL(cancelUrl)
+                .build();
+
+        orderRequest.setApplicationContext(applicationContext);
+
+        return paypalClient.post()
+                .uri("/v2/checkout/orders")
+                .header(HttpHeaders.AUTHORIZATION, "Bearer " + getAccessToken())
+                .body(orderRequest)
+                .retrieve()
+                .toEntity(OrderResponse.class)
+                .getBody();
+    }
+
+    public OrderResponse createOrderSub(Integer subId, String returnUrl, String cancelUrl) {
+        Subscription subscription = subscriptionRepository
+                .findById(subId)
+                .orElseThrow(ResourceNotFoundException::new);
+
+        OrderRequest orderRequest = new OrderRequest();
+        orderRequest.setIntent("CAPTURE");
+
+        Amount amount = new Amount();
+        amount.setCurrencyCode("USD");
+        amount.setValue(subscription.getTotalSubscription().toString());
+
+        PurchaseUnit purchaseUnit = new PurchaseUnit();
+        purchaseUnit.setReferenceId(subscription.getIdSubscription().toString());
         purchaseUnit.setAmount(amount);
 
         orderRequest.setPurchaseUnits(Collections.singletonList(purchaseUnit));

@@ -65,6 +65,14 @@ public class Subscription {
         this.stateSubscription = stateSubscription;
     }
 
+    public String getPurchasePaymentStatus() {
+        return purchasePaymentStatus;
+    }
+
+    public void setPurchasePaymentStatus(String purchasePaymentStatus) {
+        this.purchasePaymentStatus = purchasePaymentStatus;
+    }
+
     public Double getTotalSubscription() {
         return totalSubscription;
     }
@@ -89,14 +97,6 @@ public class Subscription {
         this.dateEndSubscription = dateEndSubscription;
     }
 
-    public String getPurchasePaymentStatus() {
-        return purchasePaymentStatus;
-    }
-
-    public void setPurchasePaymentStatus(String purchasePaymentStatus) {
-        this.purchasePaymentStatus = purchasePaymentStatus;
-    }
-
     public Plan getPlanId() {
         return planId;
     }
@@ -111,13 +111,5 @@ public class Subscription {
 
     public void setUsersId(Users usersId) {
         this.usersId = usersId;
-    }
-
-    public Plan getPlanId() {
-        return planId;
-    }
-
-    public void setPlanId(Plan planId) {
-        this.planId = planId;
     }
 }
