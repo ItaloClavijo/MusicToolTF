@@ -2,7 +2,6 @@ package pe.edu.upc.musictooltf.Controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.musictooltf.DTOs.UserDTO;
@@ -30,22 +29,21 @@ public class UserController {
         uS.insert(u);
     }
 
-    @PutMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
-    public void modificar(@RequestBody UserDTO dto) {
+    @PutMapping("/{id}")
+    public void modificar(@PathVariable Long id, @RequestBody UserDTO dto) {
         ModelMapper m = new ModelMapper();
         Users u = m.map(dto, Users.class);
-        uS.insert(u);
+        String encodedPassword = passwordEncoder.encode(u.getPassword());
+        u.setPassword(encodedPassword);
+        uS.update(id,u);
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public void eliminar(@PathVariable("id") Long id) {
         uS.delete(id);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public UserDTO listById(@PathVariable("id") Long id) {
         ModelMapper m = new ModelMapper();
         UserDTO dto = m.map(uS.listId(id), UserDTO.class);
@@ -53,7 +51,6 @@ public class UserController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public List<UserDTO> listar() {
         return uS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
