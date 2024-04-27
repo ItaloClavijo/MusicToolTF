@@ -38,7 +38,7 @@ public class Content {
     private List<Comentary> comentaries;
 
 
-    public Content(Integer idContent, String titleContent, String descriptionContent, Double priceContent, Boolean freeContent, String typeContent, String fileContent, Library library,List<Comentary> comentaryId, Artist artistId) {
+    public Content(Integer idContent, String titleContent, String descriptionContent, Double priceContent, Boolean freeContent, String typeContent, String fileContent, Library libraryId, Artist artist_id, List<Comentary> comentaries) {
         this.idContent = idContent;
         this.titleContent = titleContent;
         this.descriptionContent = descriptionContent;
@@ -46,11 +46,9 @@ public class Content {
         this.freeContent = freeContent;
         this.typeContent = typeContent;
         this.fileContent = fileContent;
-        this.libraryId = library;
-        this.library = library;
-        this.comentaryId = comentaryId;
-        this.artistId = artistId;
-
+        this.libraryId = libraryId;
+        this.artist_id = artist_id;
+        this.comentaries = comentaries;
     }
 
     public Content() {
@@ -112,27 +110,27 @@ public class Content {
         this.fileContent = fileContent;
     }
 
-    public Library getLibrary() {
+    public Library getLibraryId() {
         return libraryId;
     }
 
-    public void setLibrary(Library library) {
-        this.libraryId = library;
+    public void setLibraryId(Library libraryId) {
+        this.libraryId = libraryId;
     }
 
-    public List<Comentary> getComentaryId() {
-        return comentaryId;
+    public Artist getArtist_id() {
+        return artist_id;
     }
 
-    public void setComentaryId(List<Comentary> comentaryId) {
-        this.comentaryId = comentaryId;
+    public void setArtist_id(Artist artist_id) {
+        this.artist_id = artist_id;
     }
 
-    public Artist getArtistId() {
-        return artistId;
+    public List<Comentary> getComentaries() {
+        return comentaries;
     }
 
-    public void setArtistId(Artist artistId) {
-        this.artistId = artistId;
+    public void setComentaries(List<Comentary> comentaries) {
+        this.comentaries = comentaries;
     }
 }

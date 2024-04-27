@@ -16,7 +16,7 @@ public class Role {
     private String roleDescription;
 
     @ManyToOne
-    @JoinColumn(name = "user_idr")
+    @JoinColumn(name = "user_id")
     private Users usersId;
 
     public Role() {

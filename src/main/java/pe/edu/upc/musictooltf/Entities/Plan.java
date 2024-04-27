@@ -78,20 +78,4 @@ public class Plan {
     public void setSubs(List<Subscription> subs) {
         this.subs = subs;
     }
-
-    public Users getUsersId() {
-        return usersId;
-    }
-
-    public void setUsersId(Users usersId) {
-        this.usersId = usersId;
-    }
-
-    public List<Subscription> getSubscription() {
-        return subscription;
-    }
-
-    public void setSubscription(List<Subscription> subscription) {
-        this.subscription = subscription;
-    }
 }
