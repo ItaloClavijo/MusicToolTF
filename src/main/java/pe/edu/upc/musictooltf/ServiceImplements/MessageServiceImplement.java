@@ -30,8 +30,5 @@ public class MessageServiceImplement implements IMessageService {
         messageRepository.deleteById(Id);
     }
 
-    @Override
-    public Message findById(Integer Id) {
-        return messageRepository.findById(Id).orElseThrow();
-    }
+
 }
