@@ -22,14 +22,16 @@ public class LibraryController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public Library save(@RequestBody @Validated LibraryDTO libraryDTO){
         ModelMapper m = new ModelMapper();
         Library l = m.map(libraryDTO,Library.class);
         return libraryService.save(l);
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN')")
+
     @GetMapping
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public List<LibraryDTO> list(){
         return libraryService.list().stream().map(y-> {
             ModelMapper m = new ModelMapper();
@@ -37,17 +39,20 @@ public class LibraryController {
         }).collect(Collectors.toList());
     }
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void delete(@PathVariable("id") Integer id) {
         libraryService.delete(id);
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public LibraryDTO listId(@PathVariable("id") Integer id){
         ModelMapper m=new ModelMapper();
         LibraryDTO libraryDTO=m.map(libraryService.findbyId(id),LibraryDTO.class);
         return libraryDTO;
     }
     @GetMapping("/find")
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public List<LibraryDTO> findDate(@RequestParam Boolean available , @RequestParam String name){
         return libraryService.findByLibraryAvailableAndLibraryName(available,name).stream().map(y->{
             ModelMapper m= new ModelMapper();
