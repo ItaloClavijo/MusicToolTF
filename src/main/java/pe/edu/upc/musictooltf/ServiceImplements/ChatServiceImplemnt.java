@@ -27,8 +27,4 @@ public class ChatServiceImplemnt implements IChatService {
     @Override
     public void Delete(Integer Id) { chatRepository.deleteById(Id); }
 
-    @Override
-    public Chat findById(Integer Id) {
-        return chatRepository.findById(Id).orElseThrow();
-    }
 }
