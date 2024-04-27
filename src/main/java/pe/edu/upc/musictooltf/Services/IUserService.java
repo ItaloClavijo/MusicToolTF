@@ -1,20 +1,17 @@
 package pe.edu.upc.musictooltf.Services;
 
-import jakarta.persistence.Id;
-import pe.edu.upc.musictooltf.Entities.Users;
+import pe.edu.upc.musictooltf.Entities.User;
 
 import java.util.List;
 
 public interface IUserService {
 
-    public void insert(Users user);
+    public void insert(User user);
 
-    public List<Users> list();
+    public List<User> list();
 
     public void delete(Long idUser);
 
-    public Users listId(Long idUser);
-
-    public void update(Long idUser,Users user);
+    public User listId(Long idUser);
 
 }

@@ -11,10 +11,10 @@ import java.util.List;
 @Repository
 public interface IContentRepository extends JpaRepository<Content,Integer> {
 
-    @Query("from Content c where c.libraryId.libraryName=:n")
+    @Query("from Content c where c.library.libraryName=:n")
     public List<Content> contentByLibraryName(@Param("n") String n);
 
-    @Query("from Content c where c.libraryId.id=:d")
+    @Query("from Content c where c.library.id=:d")
     public List<Content> contentByLibraryId(@Param("d") Integer d);
 
 //    @Query("from Content c where c.")

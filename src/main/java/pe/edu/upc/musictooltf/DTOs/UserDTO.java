@@ -1,25 +1,17 @@
 package pe.edu.upc.musictooltf.DTOs;
 
-import jakarta.persistence.Column;
-
 public class  UserDTO {
-
     private Long id;
-    private String username;
-    private String password;
-    private Boolean enabled;
-    private String email;
-    private String description;
+    private String userName;
+    private String userPassword;
+    private Boolean userEnabled;
 
-    public UserDTO(Long id, String username, String password, Boolean enabled, String email, String description) {
+    public UserDTO(Long id, String userName, String userPassword, Boolean userEnabled) {
         this.id = id;
-        this.username = username;
-        this.password = password;
-        this.enabled = enabled;
-        this.email = email;
-        this.description = description;
+        this.userName = userName;
+        this.userPassword = userPassword;
+        this.userEnabled = userEnabled;
     }
-
     public UserDTO() {
     }
 
@@ -31,43 +23,27 @@ public class  UserDTO {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getUserPassword() {
+        return userPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setUserPassword(String userPassword) {
+        this.userPassword = userPassword;
     }
 
-    public Boolean getEnabled() {
-        return enabled;
+    public Boolean getUserEnabled() {
+        return userEnabled;
     }
 
-    public void setEnabled(Boolean enabled) {
-        this.enabled = enabled;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    public void setUserEnabled(Boolean userEnabled) {
+        this.userEnabled = userEnabled;
     }
 }

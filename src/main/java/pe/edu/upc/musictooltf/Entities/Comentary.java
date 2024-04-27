@@ -11,21 +11,21 @@ import java.time.LocalDate;
 public class Comentary {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idComent;
+    private Integer id;
 
     @Column(name = "coment", nullable = false, length = 255)
-    private String comentaryComent;
+    private String comentatyComent;
 
     @Column(name = "date", nullable = false)
     private LocalDate comentaryDate;
-
     @ManyToOne
-    @JoinColumn(name = "content_id")
+    @JoinColumn(name = "contentId")
+
     private Content contentId;
 
     public Comentary(Integer id, String comentatyComent, LocalDate comentaryDate, Content contentId) {
-        this.idComent = id;
-        this.comentaryComent = comentatyComent;
+        this.id = id;
+        this.comentatyComent = comentatyComent;
         this.comentaryDate = comentaryDate;
         this.contentId = contentId;
     }
@@ -33,20 +33,36 @@ public class Comentary {
     public Comentary() {
     }
 
-    public Integer getIdComent() {
-        return idComent;
+    public Integer getId() {
+        return id;
     }
 
-    public void setIdComent(Integer idComent) {
-        this.idComent = idComent;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getComentaryComent() {
-        return comentaryComent;
+    public String getComentatyComent() {
+        return comentatyComent;
     }
 
-    public void setComentaryComent(String comentaryComent) {
-        this.comentaryComent = comentaryComent;
+    public void setComentatyComent(String comentatyComent) {
+        this.comentatyComent = comentatyComent;
+    }
+
+    public LocalDate getComentaryDate() {
+        return comentaryDate;
+    }
+
+    public void setComentaryDate(LocalDate comentaryDate) {
+        this.comentaryDate = comentaryDate;
+    }
+
+    public Content getContentId() {
+        return contentId;
+    }
+
+    public void setContentId(Content contentId) {
+        this.contentId = contentId;
     }
 }
 

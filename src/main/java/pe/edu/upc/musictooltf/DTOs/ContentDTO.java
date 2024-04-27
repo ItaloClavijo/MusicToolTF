@@ -1,6 +1,5 @@
 package pe.edu.upc.musictooltf.DTOs;
 
-import pe.edu.upc.musictooltf.Entities.Artist;
 import pe.edu.upc.musictooltf.Entities.Library;
 
 public class ContentDTO {
@@ -13,8 +12,6 @@ public class ContentDTO {
     private String typeContent;
     private String fileContent;
     private Library library;
-
-    private Artist artist;
 
     public Integer getIdContent() {
         return idContent;
@@ -78,13 +75,5 @@ public class ContentDTO {
 
     public void setLibrary(Library library) {
         this.library = library;
-    }
-
-    public Artist getArtist() {
-        return artist;
-    }
-
-    public void setArtist(Artist artist) {
-        this.artist = artist;
     }
 }

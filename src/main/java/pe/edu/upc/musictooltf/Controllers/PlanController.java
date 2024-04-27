@@ -3,7 +3,6 @@ package pe.edu.upc.musictooltf.Controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.musictooltf.DTOs.PlanDTO;
@@ -21,7 +20,6 @@ public class PlanController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public Plan save(@RequestBody @Validated PlanDTO planDTO){
         ModelMapper m = new ModelMapper();
         Plan plan = m.map(planDTO,Plan.class);
@@ -29,7 +27,6 @@ public class PlanController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public List<PlanDTO> list(){
         return planService.list().stream().map(y->{
             ModelMapper m = new ModelMapper();
@@ -38,11 +35,9 @@ public class PlanController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public void delete(@PathVariable("id") Integer id){ planService.delete(id); }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public PlanDTO listId(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
         PlanDTO planDTO = m.map(planService.findById(id),PlanDTO.class);
@@ -50,7 +45,6 @@ public class PlanController {
     }
 
     @GetMapping("/find")
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public List<PlanDTO> findName(@RequestParam String name){
         return planService.findByPlanName(name).stream().map(y->{
             ModelMapper m = new ModelMapper();

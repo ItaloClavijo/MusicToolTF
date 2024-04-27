@@ -3,7 +3,7 @@ package pe.edu.upc.musictooltf.Entities;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "PurchaseContent")
+@Table(name = "PurchaseContentDTO")
 public class PurchaseContent {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,15 +12,11 @@ public class PurchaseContent {
     //precio compra de contenido
     @Column(name ="price")
     private Float purchaseContentPrice;
-
+    @Column(name ="idContent")
+    private Integer idContent;
     @ManyToOne
-    @JoinColumn(name = "content_id")
-    private Content contentId;
-
-    @ManyToOne
-    @JoinColumn(name = "purchase_id")
+    @JoinColumn(name = "purchaseId")
     private Purchase purchaseId;
-
     //descargas disponibles
     @Column(name ="availableDownloads")
     private int purchaseContentAvailableDownloads;
@@ -28,20 +24,20 @@ public class PurchaseContent {
     public PurchaseContent() {
     }
 
-    public PurchaseContent(Integer idPurchaseContent, Float purchaseContentPrice, Content idContent, Purchase purchaseId, int purchaseContentAvailableDownloads) {
+    public PurchaseContent(Integer idPurchaseContent, Float purchaseContentPrice, Integer idContent, Purchase purchaseId, int purchaseContentAvailableDownloads) {
         this.idPurchaseContent = idPurchaseContent;
         this.purchaseContentPrice = purchaseContentPrice;
-        this.contentId = idContent;
+        this.idContent = idContent;
         this.purchaseId = purchaseId;
         this.purchaseContentAvailableDownloads = purchaseContentAvailableDownloads;
     }
 
-    public Content getIdContent() {
-        return contentId;
+    public Integer getIdContent() {
+        return idContent;
     }
 
-    public void setIdContent(Content idContent) {
-        this.contentId = idContent;
+    public void setIdContent(Integer idContent) {
+        this.idContent = idContent;
     }
 
     public Integer getIdPurchaseContent() {

@@ -6,7 +6,7 @@ import pe.edu.upc.musictooltf.Entities.Content;
 import java.time.LocalDate;
 
 public class ComentaryDTO {
-    private Integer idComent;
+    private Integer id;
 
     private String comentatyComent;
 
@@ -14,11 +14,12 @@ public class ComentaryDTO {
 
     private Content contentId;
 
-    public Integer getId() {return idComent;
+    public Integer getId() {
+        return id;
     }
 
     public void setId(Integer id) {
-        this.idComent = id;
+        this.id = id;
     }
 
     public String getComentatyComent() {

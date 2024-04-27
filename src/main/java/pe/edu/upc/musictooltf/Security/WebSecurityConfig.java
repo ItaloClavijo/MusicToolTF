@@ -65,7 +65,6 @@ public class WebSecurityConfig {
                         .requestMatchers(antMatcher("/login")).permitAll()
                         .requestMatchers(antMatcher("/swagger-ui/**")).permitAll()
                         .requestMatchers(antMatcher("/v3/api-docs/**")).permitAll()
-                        .requestMatchers(antMatcher("/musictool/**")).permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())

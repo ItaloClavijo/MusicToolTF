@@ -1,11 +1,12 @@
 package pe.edu.upc.musictooltf.DTOs;
-import pe.edu.upc.musictooltf.Entities.Users;
+
+import pe.edu.upc.musictooltf.Entities.User;
 
 public class RoleDTO {
     private int id;
     private String roleName;
     private String roleDescription;
-    private Users userId;
+    private User userId;
 
     public int getId() {
         return id;
@@ -31,11 +32,11 @@ public class RoleDTO {
         this.roleDescription = roleDescription;
     }
 
-    public Users getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(Users userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 }

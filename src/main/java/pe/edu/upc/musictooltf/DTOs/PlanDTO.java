@@ -1,7 +1,6 @@
 package pe.edu.upc.musictooltf.DTOs;
 
 import jakarta.persistence.Column;
-import pe.edu.upc.musictooltf.Entities.Users;
 
 import java.time.LocalDate;
 
@@ -14,8 +13,9 @@ public class PlanDTO {
 
     private String planDescription;
 
+    private LocalDate planStartDate;
 
-    private Users userId;
+    private LocalDate planFinalDate;
 
     public Integer getId() {
         return id;
@@ -49,4 +49,19 @@ public class PlanDTO {
         this.planDescription = planDescription;
     }
 
+    public LocalDate getPlanStartDate() {
+        return planStartDate;
+    }
+
+    public void setPlanStartDate(LocalDate planStartDate) {
+        this.planStartDate = planStartDate;
+    }
+
+    public LocalDate getPlanFinalDate() {
+        return planFinalDate;
+    }
+
+    public void setPlanFinalDate(LocalDate planFinalDate) {
+        this.planFinalDate = planFinalDate;
+    }
 }

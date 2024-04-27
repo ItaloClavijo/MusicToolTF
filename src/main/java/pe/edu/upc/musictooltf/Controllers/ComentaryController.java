@@ -4,11 +4,11 @@ package pe.edu.upc.musictooltf.Controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.musictooltf.DTOs.ComentaryDTO;
 import pe.edu.upc.musictooltf.Entities.Comentary;
+import pe.edu.upc.musictooltf.ServiceImplements.ComentaryServiceImplement;
 import pe.edu.upc.musictooltf.Services.IComentService;
 
 
@@ -24,7 +24,6 @@ public class ComentaryController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public void save(@RequestBody @Validated ComentaryDTO comentaryDTO) {
         ModelMapper m = new ModelMapper();
         Comentary comentary = m.map(comentaryDTO, Comentary.class);
@@ -32,7 +31,6 @@ public class ComentaryController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public List<ComentaryDTO> comentariosList() {
         return comentaryService.COMENTARY_LIST().stream().map(y->{
             ModelMapper n = new ModelMapper();
@@ -41,13 +39,11 @@ public class ComentaryController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public void Delete(@PathVariable("id")Integer Id){
         comentaryService.Delete(Id);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public ComentaryDTO listId(@PathVariable("id")Integer Id){
          ModelMapper m =new ModelMapper();
          ComentaryDTO cdto=m.map(comentaryService.findById(Id), ComentaryDTO.class);

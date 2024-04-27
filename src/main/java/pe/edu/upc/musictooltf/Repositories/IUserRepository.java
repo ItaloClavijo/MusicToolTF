@@ -6,16 +6,15 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-
-import pe.edu.upc.musictooltf.Entities.Users;
+import pe.edu.upc.musictooltf.Entities.User;
 
 @Repository
-public interface IUserRepository extends JpaRepository<Users, Long> {
-    public Users findByUsername(String username);
+public interface IUserRepository extends JpaRepository<User, Long> {
+    public User findByUsername(String username);
 
     //BUSCAR POR NOMBRE
-    @Query("select count(u.username) from Users u where u.username =:username")
-    public int buscarUsername(@Param("username") String nombre);
+    @Query("select count(u.userName) from User u where u.userName =:username")
+    public int buscarUsername(@Param("userName") String nombre);
 
 
     //INSERTAR ROLES
