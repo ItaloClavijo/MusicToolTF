@@ -6,7 +6,7 @@ import pe.edu.upc.musictooltf.Entities.Subscription;
 import java.util.List;
 
 public interface ISubscriptionService {
-    public Subscription insert(Subscription subscription);
+    public Subscription insert(Integer plan_id, Long user_id);
 
     public List<Subscription> list();
 

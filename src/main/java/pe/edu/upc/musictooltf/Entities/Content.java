@@ -1,5 +1,6 @@
 package pe.edu.upc.musictooltf.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -24,16 +25,18 @@ public class Content {
     private String fileContent;
 
     @ManyToOne
-    @JoinColumn(name = "content_id")
-    private Library library;
+    @JoinColumn(name = "library_id")
+    private Library libraryId;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "content_idc")
-    private List<Comentary> comentaryId;
-
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "artist_id")
-    private Artist artistId;
+    private Artist artist_id;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "content_id")
+    private List<Comentary> comentaries;
+
 
     public Content(Integer idContent, String titleContent, String descriptionContent, Double priceContent, Boolean freeContent, String typeContent, String fileContent, Library library,List<Comentary> comentaryId, Artist artistId) {
         this.idContent = idContent;
@@ -43,9 +46,11 @@ public class Content {
         this.freeContent = freeContent;
         this.typeContent = typeContent;
         this.fileContent = fileContent;
+        this.libraryId = library;
         this.library = library;
         this.comentaryId = comentaryId;
         this.artistId = artistId;
+
     }
 
     public Content() {
@@ -108,11 +113,11 @@ public class Content {
     }
 
     public Library getLibrary() {
-        return library;
+        return libraryId;
     }
 
     public void setLibrary(Library library) {
-        this.library = library;
+        this.libraryId = library;
     }
 
     public List<Comentary> getComentaryId() {

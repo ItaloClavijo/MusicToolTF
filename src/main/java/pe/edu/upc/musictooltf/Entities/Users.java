@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -19,6 +20,15 @@ public class Users implements Serializable {
     private String password;
     private Boolean enabled;
 
+    @Column(name = "email", nullable = false)
+    private String email;
+
+    @Column(name = "description", nullable = false)
+    private String description;
+
+    @Column(name = "registerDate", nullable = false)
+    private LocalDate registerDate;
+
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "user_idr")
@@ -33,15 +43,15 @@ public class Users implements Serializable {
     public Users() {
     }
 
-    public Users(Long id, String userName, String userPassword, Boolean userEnabled, List<Role> role, Plan plan, List<Library> library) {
+    public Users(Long id, String username, String password, Boolean enabled, String email, String description, LocalDate registerDate, List<Role> roles) {
         this.id = id;
-        this.username = userName;
-        this.password = userPassword;
-        this.enabled = userEnabled;
-        this.roles = role;
-        this.plan = plan;
-        this.library = library;
-    }
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.email = email;
+        this.description = description;
+        this.registerDate = registerDate;
+        this.roles = roles;
 
     public Long getId() {
         return id;
@@ -83,21 +93,59 @@ public class Users implements Serializable {
         this.roles = role;
     }
 
-    public Plan getPlan() {
-        return plan;
+    public String getUsername() {
+        return username;
     }
 
-    public void setPlan(Plan plan) {
-        this.plan = plan;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public List<Library> getLibrary() {
-        return library;
+    public String getPassword() {
+        return password;
     }
 
-    public void setLibrary(List<Library> library) {
-        this.library = library;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
 
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getRegisterDate() {
+        return registerDate;
+    }
+
+    public void setRegisterDate(LocalDate registerDate) {
+        this.registerDate = registerDate;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 }

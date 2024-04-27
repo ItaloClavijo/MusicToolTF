@@ -1,6 +1,9 @@
 package pe.edu.upc.musictooltf.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table(name = "Artist")
@@ -18,11 +21,14 @@ public class Artist {
     @Column(name = "email", nullable = false, length = 100)
     private String emailArtist;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "artist_id")
-    private Content contentId;
 
-    public Artist(Integer idArtist, String nameArtist, String descriptionArtist, String emailArtist, Content contentId) {
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "artist_id")
+    private List<Content> contents;
+
+    public Artist(Integer idArtist, String nameArtist, String descriptionArtist, String emailArtist) {
+
         this.idArtist = idArtist;
         this.nameArtist = nameArtist;
         this.descriptionArtist = descriptionArtist;

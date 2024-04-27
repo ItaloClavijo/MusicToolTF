@@ -10,9 +10,11 @@ public class SubscriptionDTO {
 
     private String stateSubscription;
 
+    private String purchasePaymentStatus;
+
     private Double totalSubscription;
 
-    private LocalDate dateSubscription;
+
 
     private Plan planId;
 
@@ -40,12 +42,12 @@ public class SubscriptionDTO {
         this.totalSubscription = totalSubscription;
     }
 
-    public LocalDate getDateSubscription() {
-        return dateSubscription;
+    public String getPurchasePaymentStatus() {
+        return purchasePaymentStatus;
     }
 
-    public void setDateSubscription(LocalDate dateSubscription) {
-        this.dateSubscription = dateSubscription;
+    public void setPurchasePaymentStatus(String purchasePaymentStatus) {
+        this.purchasePaymentStatus = purchasePaymentStatus;
     }
 
     public Plan getPlanId() {

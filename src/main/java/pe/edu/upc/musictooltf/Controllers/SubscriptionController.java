@@ -18,12 +18,18 @@ public class SubscriptionController {
     @Autowired
     private ISubscriptionService subscriptionService;
 
+//    @ResponseStatus(HttpStatus.CREATED)
+//    @PostMapping
+//    public Subscription save(@RequestBody @Validated SubscriptionDTO subscriptionDTO){
+//        ModelMapper m = new ModelMapper();
+//        Subscription subscription = m.map(subscriptionDTO,Subscription.class);
+//        return subscriptionService.insert(subscription);
+//    }
+
     @ResponseStatus(HttpStatus.CREATED)
-    @PostMapping
-    public Subscription save(@RequestBody @Validated SubscriptionDTO subscriptionDTO){
-        ModelMapper m = new ModelMapper();
-        Subscription subscription = m.map(subscriptionDTO,Subscription.class);
-        return subscriptionService.insert(subscription);
+    @PostMapping("/{user_id}")
+    public void save(@RequestBody Integer plan_id, @PathVariable Long user_id){
+        subscriptionService.insert(plan_id,user_id);
     }
 
     @GetMapping

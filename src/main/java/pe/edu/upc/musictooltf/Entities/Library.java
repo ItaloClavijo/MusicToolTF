@@ -1,5 +1,6 @@
 package pe.edu.upc.musictooltf.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -21,21 +22,23 @@ public class Library {
     @Column(name = "libraryDescription",nullable = false, length = 100)
     private String libraryDescription;
 
-    @ManyToOne
-    @JoinColumn(name = "user_idl")
+
+    @OneToOne
+    @JoinColumn(name = "user_id")
     private Users usersId;
 
+    @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "content_id")
-    private List<Content> contentId;
+    @JoinColumn(name = "library_id")
+    private List<Content> contents;
 
-    public Library(Integer id, Boolean libraryAvailable, String libraryName, String libraryDescription, Users usersId, List<Content> contentId) {
+    public Library(Integer id, Boolean libraryAvailable, String libraryName, String libraryDescription, Users usersId, List<Content> contents) {
         this.id = id;
         this.libraryAvailable = libraryAvailable;
         this.libraryName = libraryName;
         this.libraryDescription = libraryDescription;
         this.usersId = usersId;
-        this.contentId = contentId;
+        this.contents = contents;
     }
 
     public Library() {
@@ -81,11 +84,11 @@ public class Library {
         this.usersId = usersId;
     }
 
-    public List<Content> getContentId() {
-        return contentId;
+    public List<Content> getContents() {
+        return contents;
     }
 
-    public void setContentId(List<Content> contentId) {
-        this.contentId = contentId;
+    public void setContents(List<Content> contents) {
+        this.contents = contents;
     }
 }
