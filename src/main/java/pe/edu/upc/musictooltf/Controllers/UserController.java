@@ -24,8 +24,8 @@ public class UserController {
     public void registrar(@RequestBody UserDTO dto) {
         ModelMapper m = new ModelMapper();
         Users u = m.map(dto, Users.class);
-        String encodedPassword = passwordEncoder.encode(u.getUserPassword());
-        u.setUserPassword(encodedPassword);
+        String encodedPassword = passwordEncoder.encode(u.getPassword());
+        u.setPassword(encodedPassword);
         uS.insert(u);
     }
 
