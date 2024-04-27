@@ -4,12 +4,14 @@ import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import pe.edu.upc.musictooltf.Entities.Users;
 
 public class LibraryDTO {
     private Integer id;
     private Boolean libraryAvailable;
     private String libraryName;
     private String libraryDescription;
+    private Users userId;
 
     public Integer getId() {
         return id;
@@ -41,5 +43,13 @@ public class LibraryDTO {
 
     public void setLibraryDescription(String libraryDescription) {
         this.libraryDescription = libraryDescription;
+    }
+
+    public Users getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Users userId) {
+        this.userId = userId;
     }
 }

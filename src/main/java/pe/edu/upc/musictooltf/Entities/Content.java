@@ -37,7 +37,8 @@ public class Content {
     @JoinColumn(name = "content_id")
     private List<Comentary> comentaries;
 
-    public Content(Integer idContent, String titleContent, String descriptionContent, Double priceContent, Boolean freeContent, String typeContent, String fileContent, Library library) {
+
+    public Content(Integer idContent, String titleContent, String descriptionContent, Double priceContent, Boolean freeContent, String typeContent, String fileContent, Library library,List<Comentary> comentaryId, Artist artistId) {
         this.idContent = idContent;
         this.titleContent = titleContent;
         this.descriptionContent = descriptionContent;
@@ -46,6 +47,10 @@ public class Content {
         this.typeContent = typeContent;
         this.fileContent = fileContent;
         this.libraryId = library;
+        this.library = library;
+        this.comentaryId = comentaryId;
+        this.artistId = artistId;
+
     }
 
     public Content() {
@@ -113,5 +118,21 @@ public class Content {
 
     public void setLibrary(Library library) {
         this.libraryId = library;
+    }
+
+    public List<Comentary> getComentaryId() {
+        return comentaryId;
+    }
+
+    public void setComentaryId(List<Comentary> comentaryId) {
+        this.comentaryId = comentaryId;
+    }
+
+    public Artist getArtistId() {
+        return artistId;
+    }
+
+    public void setArtistId(Artist artistId) {
+        this.artistId = artistId;
     }
 }

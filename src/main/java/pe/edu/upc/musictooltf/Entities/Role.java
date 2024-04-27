@@ -16,7 +16,7 @@ public class Role {
     private String roleDescription;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_idr")
     private Users usersId;
 
     public Role() {
@@ -56,6 +56,7 @@ public class Role {
     public Users getUsersId() {
         return usersId;
     }
+
     public void setUsersId(Users usersId) {
         this.usersId = usersId;
     }

@@ -31,8 +31,14 @@ public class Users implements Serializable {
 
     @JsonIgnore
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_idr")
     private List<Role> roles;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_idp")
+    private Plan plan;
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_idl")
+    private List<Library> library;
 
     public Users() {
     }
@@ -46,7 +52,6 @@ public class Users implements Serializable {
         this.description = description;
         this.registerDate = registerDate;
         this.roles = roles;
-    }
 
     public Long getId() {
         return id;
@@ -143,7 +148,4 @@ public class Users implements Serializable {
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
-
-
-
 }

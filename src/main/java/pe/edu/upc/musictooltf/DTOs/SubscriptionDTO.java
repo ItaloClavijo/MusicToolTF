@@ -1,6 +1,7 @@
 package pe.edu.upc.musictooltf.DTOs;
 
 import jakarta.persistence.Column;
+import pe.edu.upc.musictooltf.Entities.Plan;
 
 import java.time.LocalDate;
 
@@ -14,6 +15,8 @@ public class SubscriptionDTO {
     private Double totalSubscription;
 
 
+
+    private Plan planId;
 
     public Integer getIdSubscription() {
         return idSubscription;
@@ -45,5 +48,13 @@ public class SubscriptionDTO {
 
     public void setPurchasePaymentStatus(String purchasePaymentStatus) {
         this.purchasePaymentStatus = purchasePaymentStatus;
+    }
+
+    public Plan getPlanId() {
+        return planId;
+    }
+
+    public void setPlanId(Plan planId) {
+        this.planId = planId;
     }
 }

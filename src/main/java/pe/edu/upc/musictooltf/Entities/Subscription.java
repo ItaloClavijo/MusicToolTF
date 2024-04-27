@@ -112,4 +112,12 @@ public class Subscription {
     public void setUsersId(Users usersId) {
         this.usersId = usersId;
     }
+
+    public Plan getPlanId() {
+        return planId;
+    }
+
+    public void setPlanId(Plan planId) {
+        this.planId = planId;
+    }
 }
