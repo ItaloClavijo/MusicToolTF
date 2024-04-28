@@ -13,4 +13,7 @@ public interface ISubscriptionService {
     public void delete(Integer id);
 
     public Subscription findById(Integer id);
+
+    public List<String[]> totalIncomeByPlan();
+
 }

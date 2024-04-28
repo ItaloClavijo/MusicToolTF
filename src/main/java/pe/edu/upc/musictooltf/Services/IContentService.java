@@ -10,4 +10,10 @@ public interface IContentService {
     public List<Content> listContent();
     public List<Content> contentByLibraryName(String n);
     public List<Content> contentByLibraryId(Integer id);
+
+    public List<String[]> totalCommentsByContent();
+
+    public List<String[]> saveContentInLibraries();
+
+    public List<String[]> quantityContentByArtist();
 }

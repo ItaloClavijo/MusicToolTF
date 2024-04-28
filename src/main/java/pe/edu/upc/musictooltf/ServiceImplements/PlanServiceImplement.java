@@ -28,4 +28,9 @@ public class PlanServiceImplement implements IPlanService {
 
     @Override
     public List<Plan> findByPlanName(String name) { return planRepository.findByPlanName(name); }
+
+    @Override
+    public List<String[]> subscriptionQuantityByPlan() {
+        return planRepository.subscriptionQuantityByPlan();
+    }
 }

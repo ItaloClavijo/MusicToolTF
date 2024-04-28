@@ -45,4 +45,9 @@ public class UserServiceImplement implements IUserService {
         u.setDescription(user.getDescription());
         uR.save(u);
     }
+
+    @Override
+    public List<String[]> findUserNameWithTotalPurchaseByWithDate(LocalDate startDate, LocalDate finalDate) {
+        return uR.findUserNameWithTotalPurchaseByWithDate(startDate, finalDate);
+    }
 }

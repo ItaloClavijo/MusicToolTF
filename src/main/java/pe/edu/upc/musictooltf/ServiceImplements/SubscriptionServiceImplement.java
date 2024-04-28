@@ -65,4 +65,9 @@ public class SubscriptionServiceImplement implements ISubscriptionService {
     public Subscription findById(Integer id) {
         return subscriptionRepository.findById(id).orElseThrow();
     }
+
+    @Override
+    public List<String[]> totalIncomeByPlan() {
+        return subscriptionRepository.totalIncomeByPlan();
+    }
 }

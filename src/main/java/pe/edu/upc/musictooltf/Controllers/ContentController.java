@@ -5,9 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.musictooltf.DTOs.ContentDTO;
+import pe.edu.upc.musictooltf.DTOs.QuantityContentByArtistDTO;
+import pe.edu.upc.musictooltf.DTOs.SaveContentInLibraries;
+import pe.edu.upc.musictooltf.DTOs.TotalCommentByContentDTO;
 import pe.edu.upc.musictooltf.Entities.Content;
 import pe.edu.upc.musictooltf.Services.IContentService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,6 +60,51 @@ public class ContentController {
             ModelMapper m = new ModelMapper();
             return m.map(y,ContentDTO.class);
         }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/totalCommentByContent")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    public List<TotalCommentByContentDTO> totalCommentByContent(){
+        List<String[]> rowList = Cs.totalCommentsByContent();
+        List<TotalCommentByContentDTO> dtoList= new ArrayList<>();
+
+        for(String[] column : rowList) {
+            TotalCommentByContentDTO dto = new TotalCommentByContentDTO();
+            dto.setNameContent(column[0]);
+            dto.setTotalComent(Integer.parseInt(column[1]));
+            dtoList.add(dto);
+        }
+        return dtoList;
+    }
+
+    @GetMapping("/saveContentInLibraries")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    public List<SaveContentInLibraries> saveContentInLibraries(){
+        List<String[]> rowList = Cs.saveContentInLibraries();
+        List<SaveContentInLibraries> dtoList= new ArrayList<>();
+
+        for(String[] column : rowList) {
+            SaveContentInLibraries dto = new SaveContentInLibraries();
+            dto.setNameLibrary(column[0]);
+            dto.setCountSave(Integer.parseInt(column[1]));
+            dtoList.add(dto);
+        }
+        return dtoList;
+    }
+
+    @GetMapping("/quantityContentByArtist")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    public List<QuantityContentByArtistDTO> quantityContentByArtist(){
+        List<String[]> rowList = Cs.quantityContentByArtist();
+        List<QuantityContentByArtistDTO> dtoList= new ArrayList<>();
+
+        for(String[] column : rowList) {
+            QuantityContentByArtistDTO dto = new QuantityContentByArtistDTO();
+            dto.setNameArtist(column[0]);
+            dto.setQuantityContent(Integer.parseInt(column[1]));
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 
 }

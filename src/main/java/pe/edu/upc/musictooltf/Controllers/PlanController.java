@@ -7,9 +7,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.musictooltf.DTOs.PlanDTO;
+import pe.edu.upc.musictooltf.DTOs.SubscriptionByPlanDTO;
 import pe.edu.upc.musictooltf.Entities.Plan;
 import pe.edu.upc.musictooltf.Services.IPlanService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,5 +58,20 @@ public class PlanController {
             ModelMapper m = new ModelMapper();
             return m.map(y,PlanDTO.class);
         }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/quantitySubscriptionByPlan")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    public List<SubscriptionByPlanDTO> quantitySubscriptionByPlan(){
+        List<String[]> rowList = planService.subscriptionQuantityByPlan();
+        List<SubscriptionByPlanDTO> dtoList= new ArrayList<>();
+
+        for(String[] column : rowList) {
+            SubscriptionByPlanDTO dto = new SubscriptionByPlanDTO();
+            dto.setNamePlan(column[0]);
+            dto.setQuantitySubscription(Integer.parseInt(column[1]));
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 }

@@ -1,8 +1,10 @@
 package pe.edu.upc.musictooltf.Services;
 
 import jakarta.persistence.Id;
+import org.springframework.data.repository.query.Param;
 import pe.edu.upc.musictooltf.Entities.Users;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface IUserService {
@@ -16,5 +18,7 @@ public interface IUserService {
     public Users listId(Long idUser);
 
     public void update(Long idUser,Users user);
+
+    public List<String[]> findUserNameWithTotalPurchaseByWithDate(LocalDate startDate, LocalDate finalDate);
 
 }

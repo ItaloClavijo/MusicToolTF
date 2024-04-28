@@ -14,4 +14,6 @@ public interface IPlanService {
     public Plan findById(Integer id);
 
     public List<Plan> findByPlanName(String name);
+
+    public List<String[]> subscriptionQuantityByPlan();
 }

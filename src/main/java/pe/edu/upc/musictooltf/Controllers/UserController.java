@@ -2,12 +2,18 @@ package pe.edu.upc.musictooltf.Controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.musictooltf.DTOs.FindUserNameWithTotalPurchaseByWithDate;
+import pe.edu.upc.musictooltf.DTOs.QuantityContentByArtistDTO;
 import pe.edu.upc.musictooltf.DTOs.UserDTO;
 import pe.edu.upc.musictooltf.Entities.Users;
 import pe.edu.upc.musictooltf.Services.IUserService;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -56,6 +62,22 @@ public class UserController {
             ModelMapper m = new ModelMapper();
             return m.map(x, UserDTO.class);
         }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/findUserNameWithTotalPurchaseByWithDate")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public List<FindUserNameWithTotalPurchaseByWithDate> findUserNameWithTotalPurchaseByWithDate(@RequestParam LocalDate startDate, @RequestParam LocalDate finalDate){
+        List<String[]> rowList = uS.findUserNameWithTotalPurchaseByWithDate(startDate,finalDate);
+        List<FindUserNameWithTotalPurchaseByWithDate> dtoList= new ArrayList<>();
+
+        for(String[] column : rowList) {
+            FindUserNameWithTotalPurchaseByWithDate dto = new FindUserNameWithTotalPurchaseByWithDate();
+            dto.setUserName(column[0]);
+            dto.setDate(LocalDate.parse(column[1]));
+            dto.setTotalPurchase(Double.parseDouble(column[2]));
+            dtoList.add(dto);
+        }
+        return dtoList;
     }
 
 }
