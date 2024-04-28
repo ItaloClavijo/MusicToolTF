@@ -18,13 +18,18 @@ public class Message {
     @Column(name = "dateMEssage",nullable = false)
     private LocalDate dateMessage;
 
+    @ManyToOne
+    @JoinColumn(name = "chat_id")
+    private Chat chat_id;
+
     public Message() {
     }
 
-    public Message(Integer idMessage, String descriptionMessage, LocalDate dateMessage) {
+    public Message(Integer idMessage, String descriptionMessage, LocalDate dateMessage, Chat chat_id) {
         this.idMessage = idMessage;
         this.descriptionMessage = descriptionMessage;
         this.dateMessage = dateMessage;
+        this.chat_id = chat_id;
     }
 
     public Integer getIdMessage() {
@@ -49,5 +54,13 @@ public class Message {
 
     public void setDateMessage(LocalDate dateMessage) {
         this.dateMessage = dateMessage;
+    }
+
+    public Chat getChat_id() {
+        return chat_id;
+    }
+
+    public void setChat_id(Chat chat_id) {
+        this.chat_id = chat_id;
     }
 }
