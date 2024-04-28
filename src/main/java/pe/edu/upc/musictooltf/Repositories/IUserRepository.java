@@ -9,6 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import pe.edu.upc.musictooltf.Entities.Users;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Repository
 public interface IUserRepository extends JpaRepository<Users, Long> {
     public Users findByUsername(String username);
@@ -24,4 +27,10 @@ public interface IUserRepository extends JpaRepository<Users, Long> {
     @Query(value = "insert into roles (rol, user_id) VALUES (:rol, :user_id)", nativeQuery = true)
     public void insRol(@Param("rol") String authority, @Param("user_id") Long user_id);
 
+
+    @Query(value = "SELECT u.username, p.date, SUM(p.purchase_total) as totalcompras \n" +
+            "FROM purchase p JOIN users u ON p.user_id = u.id \n" +
+            "WHERE p.date BETWEEN :startDate AND :finalDate \n" +
+            "GROUP BY u.username, p.date ORDER BY  p.date ASC", nativeQuery = true)
+    public List<String[]> findUserNameWithTotalPurchaseByWithDate(@Param("startDate")LocalDate startDate, @Param("finalDate") LocalDate finalDate);
 }

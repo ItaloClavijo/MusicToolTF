@@ -7,9 +7,11 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.musictooltf.DTOs.SubscriptionDTO;
+import pe.edu.upc.musictooltf.DTOs.TotalIncomeByPlanDTO;
 import pe.edu.upc.musictooltf.Entities.Subscription;
 import pe.edu.upc.musictooltf.Services.ISubscriptionService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,5 +57,21 @@ public class SubscriptionController {
         ModelMapper m=new ModelMapper();
         SubscriptionDTO subscriptionDTO = m.map(subscriptionService.findById(id),SubscriptionDTO.class);
         return subscriptionDTO;
+    }
+
+    @GetMapping("/totalIncomeByPlan")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    public List<TotalIncomeByPlanDTO> totalIncome(){
+        List<String[]> rowList = subscriptionService.totalIncomeByPlan();
+        List<TotalIncomeByPlanDTO> dtoList = new ArrayList<>();
+
+        for(String[] column : rowList){
+            TotalIncomeByPlanDTO dto = new TotalIncomeByPlanDTO();
+            dto.setNamePlan(column[0]);
+            dto.setTotalIncome(Double.parseDouble(column[1]));
+            dtoList.add(dto);
+        }
+
+        return dtoList;
     }
 }
