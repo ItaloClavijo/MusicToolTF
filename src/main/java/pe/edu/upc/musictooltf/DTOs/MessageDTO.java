@@ -1,6 +1,7 @@
 package pe.edu.upc.musictooltf.DTOs;
 
 import jakarta.persistence.Column;
+import pe.edu.upc.musictooltf.Entities.Chat;
 
 import java.time.LocalDate;
 
@@ -13,6 +14,8 @@ public class MessageDTO {
 
 
     private LocalDate dateMessage;
+
+    private Chat chat;
 
     public Integer getIdMessage() {
         return idMessage;
@@ -36,5 +39,13 @@ public class MessageDTO {
 
     public void setDateMessage(LocalDate dateMessage) {
         this.dateMessage = dateMessage;
+    }
+
+    public Chat getChat() {
+        return chat;
+    }
+
+    public void setChat(Chat chat) {
+        this.chat = chat;
     }
 }

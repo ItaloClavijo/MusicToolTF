@@ -1,5 +1,7 @@
 package pe.edu.upc.musictooltf.DTOs;
 
+import pe.edu.upc.musictooltf.Entities.Users;
+
 import java.time.LocalDate;
 
 public class PurchaseDTO {
@@ -8,6 +10,8 @@ public class PurchaseDTO {
     private int purchasePaymentStatus;
     private Float purchaseTotal;
     private int planesId;
+
+    private Users user;
 
     public Integer getId() {
         return id;
@@ -47,5 +51,13 @@ public class PurchaseDTO {
 
     public void setPlanesId(int planesId) {
         this.planesId = planesId;
+    }
+
+    public Users getUser() {
+        return user;
+    }
+
+    public void setUser(Users user) {
+        this.user = user;
     }
 }
