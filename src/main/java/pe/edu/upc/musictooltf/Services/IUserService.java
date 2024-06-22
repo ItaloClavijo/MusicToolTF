@@ -19,6 +19,8 @@ public interface IUserService {
 
     public void update(Long idUser,Users user);
 
+    public Boolean existsUser(String username);
+
     public List<String[]> findUserNameWithTotalPurchaseByWithDate(LocalDate startDate, LocalDate finalDate);
 
 }
