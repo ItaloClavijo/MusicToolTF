@@ -11,13 +11,16 @@ public class  UserDTO {
     private String email;
     private String description;
 
-    public UserDTO(Long id, String username, String password, Boolean enabled, String email, String description) {
+    private String file;
+
+    public UserDTO(Long id, String username, String password, Boolean enabled, String email, String description, String file) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.enabled = enabled;
         this.email = email;
         this.description = description;
+        this.file=file;
     }
 
     public UserDTO() {
@@ -69,5 +72,13 @@ public class  UserDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 }

@@ -26,6 +26,8 @@ public class Users implements Serializable {
     @Column(name = "description", nullable = false)
     private String description;
 
+    private String file;
+
     @Column(name = "registerDate", nullable = false)
     private LocalDate registerDate;
 
@@ -47,13 +49,14 @@ public class Users implements Serializable {
     public Users() {
     }
 
-    public Users(Long id, String username, String password, Boolean enabled, String email, String description, LocalDate registerDate, List<Role> roles, List<Chat> chat1, List<Chat> chat2) {
+    public Users(Long id, String username, String password, Boolean enabled, String email, String description, String file, LocalDate registerDate, List<Role> roles, List<Chat> chat1, List<Chat> chat2) {
         this.id = id;
         this.username = username;
         this.password = password;
         this.enabled = enabled;
         this.email = email;
         this.description = description;
+        this.file = file;
         this.registerDate = registerDate;
         this.roles = roles;
         this.chat1 = chat1;
@@ -138,5 +141,13 @@ public class Users implements Serializable {
 
     public void setChat2(List<Chat> chat2) {
         this.chat2 = chat2;
+    }
+
+    public String getFile() {
+        return file;
+    }
+
+    public void setFile(String file) {
+        this.file = file;
     }
 }
