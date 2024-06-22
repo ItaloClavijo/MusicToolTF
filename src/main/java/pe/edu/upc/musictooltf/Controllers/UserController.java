@@ -2,6 +2,7 @@ package pe.edu.upc.musictooltf.Controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.parameters.P;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -62,6 +63,12 @@ public class UserController {
             ModelMapper m = new ModelMapper();
             return m.map(x, UserDTO.class);
         }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/")
+    public ResponseEntity<Boolean> usuarioExiste(@RequestParam String username){
+        boolean exists = uS.existsUser(username);
+        return ResponseEntity.ok(exists);
     }
 
     @GetMapping("/findUserNameWithTotalPurchaseByWithDate")

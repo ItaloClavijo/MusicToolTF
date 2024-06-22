@@ -16,6 +16,8 @@ import java.util.List;
 public interface IUserRepository extends JpaRepository<Users, Long> {
     public Users findByUsername(String username);
 
+    public Boolean existsByUsername(String username);
+
     //BUSCAR POR NOMBRE
     @Query("select count(u.username) from Users u where u.username =:username")
     public int buscarUsername(@Param("username") String nombre);
