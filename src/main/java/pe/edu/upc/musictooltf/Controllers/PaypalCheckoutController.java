@@ -18,7 +18,7 @@ public class PaypalCheckoutController {
     private CheckoutService checkoutService ;
 
     @PostMapping("/paypal/create")
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public PaypalOrderResponse createPaypalOrder(
             @RequestParam Integer purchaseId,
             @RequestParam String returnUrl,
@@ -28,7 +28,7 @@ public class PaypalCheckoutController {
     }
 
     @PostMapping("/paypal/create/sub")
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public PaypalOrderResponse createPaypalSubOrder(
             @RequestParam Integer subId,
             @RequestParam String returnUrl,
@@ -38,7 +38,7 @@ public class PaypalCheckoutController {
     }
 
     @PostMapping("/paypal/capture")
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public PaypalCaptureResponse capturePaypalOrder(@RequestParam String orderId) {
         return checkoutService.capturePaypalPayment(orderId);
     }

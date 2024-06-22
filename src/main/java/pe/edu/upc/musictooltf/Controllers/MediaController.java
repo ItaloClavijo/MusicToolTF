@@ -21,14 +21,14 @@ public class MediaController {
     private StorageService storageService;
 
     @PostMapping("/upload")
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public UploadMediaResponse upload(@RequestParam("file") MultipartFile multipartFile) {
         String path = storageService.store(multipartFile);
         return new UploadMediaResponse(path);
     }
 
     @GetMapping("/{fileName}")
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public ResponseEntity<Resource> getResource(@PathVariable String fileName) throws IOException {
         Resource resource = storageService.loadAsResource(fileName);
         String contentType = Files.probeContentType(resource.getFile().toPath());

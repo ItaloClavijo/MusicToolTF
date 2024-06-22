@@ -18,7 +18,7 @@ public class PurchaseContentController {
     private IPurchaseContentService purchaseContentService;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public void insert(@RequestBody PurchaseContentDTO purchaseContentDTO) {
         ModelMapper m = new ModelMapper();
         PurchaseContent purchaseContent = m.map(purchaseContentDTO, PurchaseContent.class);
@@ -32,7 +32,7 @@ public class PurchaseContentController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public List<PurchaseContentDTO> buyContentList() {
         return purchaseContentService.list().stream().map(y -> {
             ModelMapper m = new ModelMapper();

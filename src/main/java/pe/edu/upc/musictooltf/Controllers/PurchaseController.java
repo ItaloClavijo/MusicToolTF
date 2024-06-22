@@ -17,7 +17,7 @@ public class PurchaseController {
     @Autowired
     private IPurchaseService purchaseService;
     @PostMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public void insert(@RequestBody List<Integer> contentIds) {
         purchaseService.create(contentIds);
     }
@@ -29,7 +29,7 @@ public class PurchaseController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public List<PurchaseDTO> buysList() {
         return purchaseService.list().stream().map(y -> {
             ModelMapper m = new ModelMapper();
