@@ -23,7 +23,7 @@ public class PlanController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public Plan save(@RequestBody @Validated PlanDTO planDTO){
         ModelMapper m = new ModelMapper();
         Plan plan = m.map(planDTO,Plan.class);
@@ -31,7 +31,7 @@ public class PlanController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public List<PlanDTO> list(){
         return planService.list().stream().map(y->{
             ModelMapper m = new ModelMapper();
@@ -44,7 +44,7 @@ public class PlanController {
     public void delete(@PathVariable("id") Integer id){ planService.delete(id); }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public PlanDTO listId(@PathVariable("id") Integer id){
         ModelMapper m = new ModelMapper();
         PlanDTO planDTO = m.map(planService.findById(id),PlanDTO.class);
@@ -52,7 +52,7 @@ public class PlanController {
     }
 
     @GetMapping("/find")
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public List<PlanDTO> findName(@RequestParam String name){
         return planService.findByPlanName(name).stream().map(y->{
             ModelMapper m = new ModelMapper();
@@ -61,7 +61,7 @@ public class PlanController {
     }
 
     @GetMapping("/quantitySubscriptionByPlan")
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('MELOMANO')")
     public List<SubscriptionByPlanDTO> quantitySubscriptionByPlan(){
         List<String[]> rowList = planService.subscriptionQuantityByPlan();
         List<SubscriptionByPlanDTO> dtoList= new ArrayList<>();

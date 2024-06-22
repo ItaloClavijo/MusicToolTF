@@ -31,13 +31,13 @@ public class SubscriptionController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{user_id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('MELOMANO')")
     public void save(@RequestBody Integer plan_id, @PathVariable Long user_id){
         subscriptionService.insert(plan_id,user_id);
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('MELOMANO')")
     public List<SubscriptionDTO> list(){
         return subscriptionService.list().stream().map(y-> {
             ModelMapper m = new ModelMapper();
@@ -46,13 +46,13 @@ public class SubscriptionController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('MELOMANO')")
     public void delete(@PathVariable("id") Integer id) {
         subscriptionService.delete(id);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('MELOMANO')")
     public SubscriptionDTO listId(@PathVariable("id") Integer id){
         ModelMapper m=new ModelMapper();
         SubscriptionDTO subscriptionDTO = m.map(subscriptionService.findById(id),SubscriptionDTO.class);
@@ -60,7 +60,7 @@ public class SubscriptionController {
     }
 
     @GetMapping("/totalIncomeByPlan")
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('MELOMANO')")
     public List<TotalIncomeByPlanDTO> totalIncome(){
         List<String[]> rowList = subscriptionService.totalIncomeByPlan();
         List<TotalIncomeByPlanDTO> dtoList = new ArrayList<>();
