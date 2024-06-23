@@ -60,7 +60,7 @@ public class SubscriptionController {
     }
 
     @GetMapping("/totalIncomeByPlan")
-    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('ADMIN') || hasAuthority('MELOMANO')")
     public List<TotalIncomeByPlanDTO> totalIncome(){
         List<String[]> rowList = subscriptionService.totalIncomeByPlan();
         List<TotalIncomeByPlanDTO> dtoList = new ArrayList<>();

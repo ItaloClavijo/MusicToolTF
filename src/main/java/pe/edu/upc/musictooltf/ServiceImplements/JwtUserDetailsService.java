@@ -50,4 +50,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 
         return ud;
     }
+    public Users getUserByUsername(String username) {
+        return repo.findByUsername(username);
+    }
 }

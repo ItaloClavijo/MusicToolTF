@@ -24,7 +24,7 @@ public class ComentaryController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public void save(@RequestBody @Validated ComentaryDTO comentaryDTO) {
         ModelMapper m = new ModelMapper();
         Comentary comentary = m.map(comentaryDTO, Comentary.class);
@@ -32,7 +32,7 @@ public class ComentaryController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public List<ComentaryDTO> comentariosList() {
         return comentaryService.COMENTARY_LIST().stream().map(y->{
             ModelMapper n = new ModelMapper();
@@ -47,7 +47,7 @@ public class ComentaryController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public ComentaryDTO listId(@PathVariable("id")Integer Id){
          ModelMapper m =new ModelMapper();
          ComentaryDTO cdto=m.map(comentaryService.findById(Id), ComentaryDTO.class);

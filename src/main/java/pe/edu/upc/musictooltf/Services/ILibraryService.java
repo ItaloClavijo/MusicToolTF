@@ -12,6 +12,9 @@ public interface ILibraryService {
 
     public void delete (Integer id);
 
+    public Library update(Library library, Integer id);
+
+
     public Library findbyId(Integer id);
 
     public List<Library> findByLibraryAvailableAndLibraryName(Boolean available, String name);

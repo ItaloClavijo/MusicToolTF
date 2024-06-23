@@ -16,11 +16,14 @@ import java.util.stream.Collectors;
 public class PurchaseController {
     @Autowired
     private IPurchaseService purchaseService;
+
+
     @PostMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
-    public void insert(@RequestBody List<Integer> contentIds) {
-        purchaseService.create(contentIds);
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
+    public Purchase insert(@RequestBody List<Integer> contentIds) {
+        return purchaseService.create(contentIds);
     }
+
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -29,7 +32,7 @@ public class PurchaseController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public List<PurchaseDTO> buysList() {
         return purchaseService.list().stream().map(y -> {
             ModelMapper m = new ModelMapper();

@@ -14,6 +14,12 @@ public class ContentServiceImplement implements IContentService {
     @Autowired
     private IContentRepository cR;
 
+
+    @Override
+    public List<Content> last() {
+        return cR.findTop6ByOrderByIdContentDesc();
+    }
+
     @Override
     public void save(Content c) {
         cR.save(c);
@@ -22,6 +28,12 @@ public class ContentServiceImplement implements IContentService {
     public void delete(Integer id) {
         cR.deleteById(id);
     }
+
+    @Override
+    public Content findById(Integer id) {
+        return cR.findById(id).orElseThrow();
+    }
+
     @Override
     public List<Content> listContent() {
         return cR.findAll();

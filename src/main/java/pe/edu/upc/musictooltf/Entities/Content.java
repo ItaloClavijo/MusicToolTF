@@ -23,6 +23,8 @@ public class Content {
     private String typeContent;
     @Column(name = "fileContent",nullable = false)
     private String fileContent;
+    @Column(name = "coverContent",nullable = false)
+    private String coverContent;
 
     @ManyToOne
     @JoinColumn(name = "library_id")
@@ -38,7 +40,10 @@ public class Content {
     private List<Comentary> comentaries;
 
 
-    public Content(Integer idContent, String titleContent, String descriptionContent, Double priceContent, Boolean freeContent, String typeContent, String fileContent, Library libraryId, Artist artist_id, List<Comentary> comentaries) {
+    public Content() {
+    }
+
+    public Content(Integer idContent, String titleContent, String descriptionContent, Double priceContent, Boolean freeContent, String typeContent, String fileContent, String coverContent, Library libraryId, Artist artist_id, List<Comentary> comentaries) {
         this.idContent = idContent;
         this.titleContent = titleContent;
         this.descriptionContent = descriptionContent;
@@ -46,12 +51,10 @@ public class Content {
         this.freeContent = freeContent;
         this.typeContent = typeContent;
         this.fileContent = fileContent;
+        this.coverContent = coverContent;
         this.libraryId = libraryId;
         this.artist_id = artist_id;
         this.comentaries = comentaries;
-    }
-
-    public Content() {
     }
 
     public Integer getIdContent() {
@@ -110,6 +113,14 @@ public class Content {
         this.fileContent = fileContent;
     }
 
+    public String getCoverContent() {
+        return coverContent;
+    }
+
+    public void setCoverContent(String coverContent) {
+        this.coverContent = coverContent;
+    }
+
     public Library getLibraryId() {
         return libraryId;
     }
@@ -134,3 +145,4 @@ public class Content {
         this.comentaries = comentaries;
     }
 }
+

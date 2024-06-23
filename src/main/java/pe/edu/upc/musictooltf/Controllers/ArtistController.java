@@ -22,7 +22,7 @@ public class ArtistController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public Artist save(@RequestBody @Validated ArtistDTO artistDTO){
         ModelMapper m = new ModelMapper();
         Artist a = m.map(artistDTO,Artist.class);
@@ -30,7 +30,7 @@ public class ArtistController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public List<ArtistDTO> list(){
         return artistService.list().stream().map(y-> {
             ModelMapper m = new ModelMapper();
@@ -39,13 +39,13 @@ public class ArtistController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public void delete(@PathVariable("id") Integer id) {
         artistService.delete(id);
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
     public ArtistDTO listId(@PathVariable("id") Integer id){
         ModelMapper m=new ModelMapper();
         ArtistDTO artistDTO = m.map(artistService.findById(id),ArtistDTO.class);
