@@ -56,8 +56,4 @@ public class UserServiceImplement implements IUserService {
         return uR.findUserNameWithTotalPurchaseByWithDate(startDate, finalDate);
     }
 
-    @Override
-    public Boolean existsUser(String username) {
-        return uR.existsByUsername(username);
-    }
 }

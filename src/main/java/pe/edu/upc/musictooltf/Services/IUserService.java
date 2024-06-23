@@ -23,5 +23,4 @@ public interface IUserService {
 
     public List<String[]> findUserNameWithTotalPurchaseByWithDate(LocalDate startDate, LocalDate finalDate);
 
-    public Boolean existsUser(String username);
 }
