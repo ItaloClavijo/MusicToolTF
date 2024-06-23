@@ -15,6 +15,7 @@ import java.nio.file.Files;
 
 @RequestMapping("/musictool/mediastorage")
 @RestController
+@CrossOrigin(origins = "http://localhost:4200")
 public class MediaController {
 
     @Autowired

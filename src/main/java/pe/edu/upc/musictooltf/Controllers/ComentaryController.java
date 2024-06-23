@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("musictool/comentary")
+@CrossOrigin(origins = "http://localhost:4200")
 public class ComentaryController {
     @Autowired
     private IComentService comentaryService;

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 @RestController
 @RequestMapping("musictool/role")
+@CrossOrigin(origins = "http://localhost:4200")
 public class RoleController {
     @Autowired
     private IRoleService roleService;
