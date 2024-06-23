@@ -3,6 +3,7 @@ package pe.edu.upc.musictooltf.ServiceImplements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.musictooltf.Entities.Library;
+import pe.edu.upc.musictooltf.Exceptions.ResourceNotFoundException;
 import pe.edu.upc.musictooltf.Repositories.ILibraryRepository;
 import pe.edu.upc.musictooltf.Services.ILibraryService;
 
@@ -17,6 +18,21 @@ public class LibraryServiceImplement implements ILibraryService {
     public Library save(Library library) {
         return libraryRepository.save(library);
     }
+
+    @Override
+    public Library update(Library library, Integer id) {
+
+        Library l = libraryRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+
+        l.setLibraryName(library.getLibraryName());
+        l.setLibraryDescription(library.getLibraryDescription());
+        l.setLibraryAvailable(library.getLibraryAvailable());
+        l.setContents(library.getContents());
+        l.setUsersId(library.getUsersId());
+
+        return libraryRepository.save(l);
+    }
+
 
     @Override
     public List<Library> list() {

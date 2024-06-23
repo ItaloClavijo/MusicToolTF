@@ -1,5 +1,6 @@
 package pe.edu.upc.musictooltf.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -17,6 +18,7 @@ public class PurchaseContent {
     @JoinColumn(name = "content_id")
     private Content contentId;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "purchase_id")
     private Purchase purchaseId;

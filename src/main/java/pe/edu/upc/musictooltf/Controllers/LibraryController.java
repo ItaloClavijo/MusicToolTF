@@ -20,6 +20,15 @@ public class LibraryController {
     @Autowired
     private ILibraryService libraryService;
 
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
+    @ResponseStatus(HttpStatus.OK)
+    @PutMapping
+    public Library update(@RequestBody @Validated LibraryDTO libraryDTO, Integer id){
+        ModelMapper m = new ModelMapper();
+        Library l = m.map(libraryDTO,Library.class);
+        return libraryService.update(l,id);
+    }
+    
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")

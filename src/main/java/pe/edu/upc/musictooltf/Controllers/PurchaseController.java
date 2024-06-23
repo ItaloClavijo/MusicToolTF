@@ -16,11 +16,15 @@ import java.util.stream.Collectors;
 public class PurchaseController {
     @Autowired
     private IPurchaseService purchaseService;
+
+
     @PostMapping
     @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
-    public void insert(@RequestBody List<Integer> contentIds) {
-        purchaseService.create(contentIds);
+
+    public Purchase insert(@RequestBody List<Integer> contentIds) {
+        return purchaseService.create(contentIds);
     }
+
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")

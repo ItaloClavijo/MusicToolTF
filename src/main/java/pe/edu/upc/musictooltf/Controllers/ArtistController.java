@@ -22,7 +22,8 @@ public class ArtistController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
+
     public Artist save(@RequestBody @Validated ArtistDTO artistDTO){
         ModelMapper m = new ModelMapper();
         Artist a = m.map(artistDTO,Artist.class);
@@ -39,7 +40,9 @@ public class ArtistController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
+
     public void delete(@PathVariable("id") Integer id) {
         artistService.delete(id);
     }

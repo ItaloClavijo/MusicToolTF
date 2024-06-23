@@ -7,6 +7,7 @@ import java.util.List;
 public interface IContentService {
     public void save(Content c);
     public void delete(Integer id);
+    public Content findById(Integer id);
     public List<Content> listContent();
     public List<Content> contentByLibraryName(String n);
     public List<Content> contentByLibraryId(Integer id);
@@ -16,4 +17,7 @@ public interface IContentService {
     public List<String[]> saveContentInLibraries();
 
     public List<String[]> quantityContentByArtist();
+
+    public List<Content> last();
+
 }

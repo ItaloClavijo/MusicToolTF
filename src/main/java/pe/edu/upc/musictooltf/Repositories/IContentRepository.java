@@ -18,6 +18,8 @@ public interface IContentRepository extends JpaRepository<Content,Integer> {
     @Query("from Content c where c.libraryId.id=:d")
     public List<Content> contentByLibraryId(@Param("d") Integer d);
 
+    public List<Content> findTop6ByOrderByIdContentDesc();
+
 //    @Query("from Content c where c.")
 //    public List<String[]> quantityContentByLibrary();
 

@@ -21,7 +21,7 @@ public class MessageController {
     private IMessageService Ms;
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('MELOMANO')")
     public void save(@RequestBody @Validated MessageDTO messageDTO) {
         ModelMapper m = new ModelMapper();
         Message message = m.map(messageDTO, Message.class);
@@ -29,7 +29,7 @@ public class MessageController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('MELOMANO')")
     public List<MessageDTO> messageList() {
         return Ms.MESSAGE_LIST().stream().map(y->{
             ModelMapper n = new ModelMapper();
@@ -38,7 +38,7 @@ public class MessageController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('MELOMANO')")
     public void Delete(@PathVariable("id")Integer Id){
         Ms.Delete(Id);
     }

@@ -25,7 +25,7 @@ public class ChatController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('MELOMANO')")
     public Chat save(@RequestBody @Validated ChatDTO chatDTO) {
         ModelMapper m = new ModelMapper();
         Chat chat = m.map(chatDTO, Chat.class);
@@ -33,7 +33,7 @@ public class ChatController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('MELOMANO')")
     public List<ChatDTO> chatList() {
         return chatService.CHAT_LIST().stream().map(y->{
             ModelMapper n = new ModelMapper();
@@ -42,7 +42,7 @@ public class ChatController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('MELOMANO')")
     public void Delete(@PathVariable("id")Integer Id){
         chatService.Delete(Id);
     }

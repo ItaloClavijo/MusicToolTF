@@ -12,6 +12,7 @@ public class ContentDTO {
     private Boolean freeContent;
     private String typeContent;
     private String fileContent;
+    private String coverContent;
     private Library library;
 
     private Artist artist;
@@ -70,6 +71,14 @@ public class ContentDTO {
 
     public void setFileContent(String fileContent) {
         this.fileContent = fileContent;
+    }
+
+    public String getCoverContent() {
+        return coverContent;
+    }
+
+    public void setCoverContent(String coverContent) {
+        this.coverContent = coverContent;
     }
 
     public Library getLibrary() {

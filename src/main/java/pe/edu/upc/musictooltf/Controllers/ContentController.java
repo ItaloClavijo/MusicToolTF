@@ -2,6 +2,7 @@ package pe.edu.upc.musictooltf.Controllers;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.musictooltf.DTOs.ContentDTO;
@@ -21,6 +22,25 @@ public class ContentController {
 
     @Autowired
     private IContentService Cs;
+
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
+    @GetMapping("/last")
+    public List<ContentDTO> last() {
+        return Cs.last().stream().map(
+                y -> {
+                    ModelMapper m = new ModelMapper();
+                    return m.map(y, ContentDTO.class);
+                }
+        ).collect(Collectors.toList());
+    }
+
+    @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
+    @GetMapping("/{id}")
+    public ContentDTO listId(@PathVariable("id") Integer id){
+        ModelMapper m=new ModelMapper();
+        ContentDTO contentDTO=m.map(Cs.findById(id),ContentDTO.class);
+        return contentDTO;
+    }
 
     @PostMapping
     @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")

@@ -27,6 +27,12 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @GetMapping("/")
+    public ResponseEntity<Boolean> usuarioExiste(@RequestParam String username){
+        boolean exists = uS.existsUser(username);
+        return ResponseEntity.ok(exists);
+    }
+
     @PostMapping
     public void registrar(@RequestBody UserDTO dto) {
         ModelMapper m = new ModelMapper();

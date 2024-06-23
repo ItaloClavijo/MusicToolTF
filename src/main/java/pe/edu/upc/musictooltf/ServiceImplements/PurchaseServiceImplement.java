@@ -25,12 +25,12 @@ public class PurchaseServiceImplement implements IPurchaseService {
     private IContentRepository iContentRepository;
 
     @Override
-    public void create(List<Integer> contentIds) {
+    public Purchase create(List<Integer> contentIds) {
 
         Purchase purchase = new Purchase();
         purchase.setPurchaseDate(LocalDateTime.now());
         purchase.setPurchasePaymentStatus("PENDING");
-        //purchase.setCustomer(null);
+        purchase.setUserId(null);
 
         float total = 0;
         List<PurchaseContent> items = new ArrayList<>();
@@ -52,7 +52,7 @@ public class PurchaseServiceImplement implements IPurchaseService {
         purchase.setPurchaseTotal(total);
         purchase.setItems(items);
 
-        purchaseRepository.save(purchase);
+        return purchaseRepository.save(purchase);
     }
 
 //    public Resource getItemResource(Integer purchaseId, Integer itemId) {
