@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("musictool/subscriptions")
+@CrossOrigin(origins = "http://localhost:4200")
 public class SubscriptionController {
     @Autowired
     private ISubscriptionService subscriptionService;

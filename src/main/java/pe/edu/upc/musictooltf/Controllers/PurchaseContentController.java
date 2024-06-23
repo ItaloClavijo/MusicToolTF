@@ -13,6 +13,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("musictool/purchaseContent")
+@CrossOrigin(origins = "http://localhost:4200")
 public class PurchaseContentController {
     @Autowired
     private IPurchaseContentService purchaseContentService;
