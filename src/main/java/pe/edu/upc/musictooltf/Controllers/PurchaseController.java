@@ -20,6 +20,7 @@ public class PurchaseController {
 
     @PostMapping
     @PreAuthorize("hasAuthority('MELOMANO') || hasAuthority('ADMIN')")
+
     public Purchase insert(@RequestBody List<Integer> contentIds) {
         return purchaseService.create(contentIds);
     }

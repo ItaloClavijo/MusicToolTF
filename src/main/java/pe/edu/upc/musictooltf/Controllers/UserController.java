@@ -71,6 +71,12 @@ public class UserController {
         }).collect(Collectors.toList());
     }
 
+    @GetMapping("/")
+    public ResponseEntity<Boolean> usuarioExiste(@RequestParam String username){
+        boolean exists = uS.existsUser(username);
+        return ResponseEntity.ok(exists);
+    }
+
     @GetMapping("/findUserNameWithTotalPurchaseByWithDate")
     @PreAuthorize("hasAuthority('ADMIN')")
     public List<FindUserNameWithTotalPurchaseByWithDate> findUserNameWithTotalPurchaseByWithDate(@RequestParam LocalDate startDate, @RequestParam LocalDate finalDate){

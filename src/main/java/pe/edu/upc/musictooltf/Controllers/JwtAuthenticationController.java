@@ -34,7 +34,9 @@ public class JwtAuthenticationController {
         authenticate(req.getUsername(), req.getPassword());
         final UserDetails userDetails = userDetailsService.loadUserByUsername(req.getUsername());
         final Users user = userDetailsService.getUserByUsername(req.getUsername());
+
         final String token = jwtTokenUtil.generateToken(userDetails,user.getId());
+
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
