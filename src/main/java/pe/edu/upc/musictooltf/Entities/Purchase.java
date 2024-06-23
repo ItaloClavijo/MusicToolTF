@@ -25,6 +25,10 @@ public class Purchase {
     @OneToMany(mappedBy = "purchaseId", cascade = CascadeType.ALL)
     private List<PurchaseContent> items;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private Users user_id;
+
     /*
     @ManyToOne
     @JoinColumn(name = "userID")
@@ -34,12 +38,13 @@ public class Purchase {
     public Purchase() {
     }
 
-    public Purchase(Integer idPurchase, LocalDateTime purchaseDate, String purchasePaymentStatus, Float purchaseTotal, List<PurchaseContent> items) {
+    public Purchase(Integer idPurchase, LocalDateTime purchaseDate, String purchasePaymentStatus, Float purchaseTotal, List<PurchaseContent> items, Users user_id) {
         this.idPurchase = idPurchase;
         this.purchaseDate = purchaseDate;
         this.purchasePaymentStatus = purchasePaymentStatus;
         this.purchaseTotal = purchaseTotal;
         this.items = items;
+        this.user_id = user_id;
     }
 
     public Integer getIdPurchase() {
@@ -80,5 +85,13 @@ public class Purchase {
 
     public void setItems(List<PurchaseContent> items) {
         this.items = items;
+    }
+
+    public Users getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(Users user_id) {
+        this.user_id = user_id;
     }
 }

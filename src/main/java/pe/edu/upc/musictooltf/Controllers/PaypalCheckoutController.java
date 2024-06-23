@@ -1,6 +1,7 @@
 package pe.edu.upc.musictooltf.Controllers;
 
 import lombok.AllArgsConstructor;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ public class PaypalCheckoutController {
     private CheckoutService checkoutService ;
 
     @PostMapping("/paypal/create")
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public PaypalOrderResponse createPaypalOrder(
             @RequestParam Integer purchaseId,
             @RequestParam String returnUrl,
@@ -26,6 +28,7 @@ public class PaypalCheckoutController {
     }
 
     @PostMapping("/paypal/create/sub")
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public PaypalOrderResponse createPaypalSubOrder(
             @RequestParam Integer subId,
             @RequestParam String returnUrl,
@@ -35,6 +38,7 @@ public class PaypalCheckoutController {
     }
 
     @PostMapping("/paypal/capture")
+    @PreAuthorize("hasAuthority('USER') || hasAuthority('ADMIN')")
     public PaypalCaptureResponse capturePaypalOrder(@RequestParam String orderId) {
         return checkoutService.capturePaypalPayment(orderId);
     }

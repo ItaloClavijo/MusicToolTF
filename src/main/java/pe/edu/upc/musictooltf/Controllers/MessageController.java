@@ -3,6 +3,7 @@ package pe.edu.upc.musictooltf.Controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.musictooltf.DTOs.MessageDTO;
@@ -20,6 +21,7 @@ public class MessageController {
     private IMessageService Ms;
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
+    @PreAuthorize("hasAuthority('USER')")
     public void save(@RequestBody @Validated MessageDTO messageDTO) {
         ModelMapper m = new ModelMapper();
         Message message = m.map(messageDTO, Message.class);
@@ -27,6 +29,7 @@ public class MessageController {
     }
 
     @GetMapping
+    @PreAuthorize("hasAuthority('USER')")
     public List<MessageDTO> messageList() {
         return Ms.MESSAGE_LIST().stream().map(y->{
             ModelMapper n = new ModelMapper();
@@ -35,14 +38,11 @@ public class MessageController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('USER')")
     public void Delete(@PathVariable("id")Integer Id){
         Ms.Delete(Id);
     }
 
-    @GetMapping("/{id}")
-    public MessageDTO listId(@PathVariable("id")Integer Id){
-        ModelMapper m =new ModelMapper();
-        MessageDTO mdto=m.map(Ms.findById(Id), MessageDTO.class);
-        return mdto;
-    }
+
+
 }

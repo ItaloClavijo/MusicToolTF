@@ -34,11 +34,20 @@ public class Users implements Serializable {
     @JoinColumn(name = "user_id")
     private List<Role> roles;
 
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user1_id")
+    private List<Chat> chat1;
+
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "user2_id")
+    private List<Chat> chat2;
 
     public Users() {
     }
 
-    public Users(Long id, String username, String password, Boolean enabled, String email, String description, LocalDate registerDate, List<Role> roles) {
+    public Users(Long id, String username, String password, Boolean enabled, String email, String description, LocalDate registerDate, List<Role> roles, List<Chat> chat1, List<Chat> chat2) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -47,6 +56,8 @@ public class Users implements Serializable {
         this.description = description;
         this.registerDate = registerDate;
         this.roles = roles;
+        this.chat1 = chat1;
+        this.chat2 = chat2;
     }
 
     public Long getId() {
@@ -111,5 +122,21 @@ public class Users implements Serializable {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Chat> getChat1() {
+        return chat1;
+    }
+
+    public void setChat1(List<Chat> chat1) {
+        this.chat1 = chat1;
+    }
+
+    public List<Chat> getChat2() {
+        return chat2;
+    }
+
+    public void setChat2(List<Chat> chat2) {
+        this.chat2 = chat2;
     }
 }

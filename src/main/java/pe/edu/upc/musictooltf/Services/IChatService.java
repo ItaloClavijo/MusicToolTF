@@ -8,5 +8,5 @@ public interface IChatService {
     public Chat create(Chat chat);
     public List<Chat> CHAT_LIST();
     public void Delete(Integer Id);
-    public Chat findById(Integer Id);
+
 }

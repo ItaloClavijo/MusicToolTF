@@ -35,4 +35,19 @@ public class UserServiceImplement implements IUserService {
     public Users listId(Long idUsuario) {
         return uR.findById(idUsuario).orElse(new Users());
     }
+
+    @Override
+    public void update(Long idUser, Users user) {
+        Users u = uR.findById(idUser).orElseThrow();
+        u.setUsername(user.getUsername());
+        u.setPassword(user.getPassword());
+        u.setEmail(user.getEmail());
+        u.setDescription(user.getDescription());
+        uR.save(u);
+    }
+
+    @Override
+    public List<String[]> findUserNameWithTotalPurchaseByWithDate(LocalDate startDate, LocalDate finalDate) {
+        return uR.findUserNameWithTotalPurchaseByWithDate(startDate, finalDate);
+    }
 }

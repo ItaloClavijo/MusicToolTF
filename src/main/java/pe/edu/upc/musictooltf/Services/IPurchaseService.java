@@ -9,4 +9,5 @@ public interface IPurchaseService {
     public void delete (int id);
     public List<Purchase> list ();
     public Purchase updateToPaid(Integer purchaseId);
+
 }

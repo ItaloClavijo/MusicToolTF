@@ -1,8 +1,11 @@
 package pe.edu.upc.musictooltf.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import org.apache.catalina.User;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "Chat")
@@ -12,22 +15,27 @@ public class Chat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer idChat;
 
-    @Column (name = "chatContent",nullable = false)
-    private String chatContent;
-    @Column(name = "date",nullable = false)
-    private LocalDate chatDate;
-    @Column(name = "contentId",nullable = false)
-    private int contentId;
+    @ManyToOne
+    @JoinColumn(name = "user1_id")
+    private Users user1id;
 
+    @ManyToOne
+    @JoinColumn(name = "user2_id")
+    private Users user2id;
 
-    public Chat() {
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "chat_id")
+    private List<Message> messages;
+
+    public Chat(Integer idChat, Users user1id, Users user2id, List<Message> messages) {
+        this.idChat = idChat;
+        this.user1id = user1id;
+        this.user2id = user2id;
+        this.messages = messages;
     }
 
-    public Chat(Integer idChat, String chatContent, LocalDate chatDate, int contentId) {
-        idChat = idChat;
-        this.chatContent = chatContent;
-        this.chatDate = chatDate;
-        this.contentId = contentId;
+    public Chat() {
     }
 
     public Integer getIdChat() {
@@ -35,30 +43,30 @@ public class Chat {
     }
 
     public void setIdChat(Integer idChat) {
-        idChat = idChat;
+        this.idChat = idChat;
     }
 
-    public String getChatContent() {
-        return chatContent;
+    public Users getUser1id() {
+        return user1id;
     }
 
-    public void setChatContent(String chatContent) {
-        this.chatContent = chatContent;
+    public void setUser1id(Users user1id) {
+        this.user1id = user1id;
     }
 
-    public LocalDate getChatDate() {
-        return chatDate;
+    public Users getUser2id() {
+        return user2id;
     }
 
-    public void setChatDate(LocalDate chatDate) {
-        this.chatDate = chatDate;
+    public void setUser2id(Users user2id) {
+        this.user2id = user2id;
     }
 
-    public int getContentId() {
-        return contentId;
+    public List<Message> getMessages() {
+        return messages;
     }
 
-    public void setContentId(int contentId) {
-        this.contentId = contentId;
+    public void setMessages(List<Message> messages) {
+        this.messages = messages;
     }
 }

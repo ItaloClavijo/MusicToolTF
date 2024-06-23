@@ -34,4 +34,19 @@ public class ContentServiceImplement implements IContentService {
     public List<Content> contentByLibraryId(Integer id) {
         return cR.contentByLibraryId(id);
     }
+
+    @Override
+    public List<String[]> totalCommentsByContent() {
+        return cR.totalCommentsByContent();
+    }
+
+    @Override
+    public List<String[]> saveContentInLibraries() {
+        return cR.saveContentInLibraries();
+    }
+
+    @Override
+    public List<String[]> quantityContentByArtist() {
+        return cR.quantityContentByArtist();
+    }
 }

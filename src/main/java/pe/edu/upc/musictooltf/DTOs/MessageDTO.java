@@ -1,8 +1,21 @@
 package pe.edu.upc.musictooltf.DTOs;
 
+import jakarta.persistence.Column;
+import pe.edu.upc.musictooltf.Entities.Chat;
+
+import java.time.LocalDate;
+
 public class MessageDTO {
+
     private Integer idMessage;
-    private int usersId;
+
+
+    private String descriptionMessage ;
+
+
+    private LocalDate dateMessage;
+
+    private Chat chat;
 
     public Integer getIdMessage() {
         return idMessage;
@@ -12,11 +25,27 @@ public class MessageDTO {
         this.idMessage = idMessage;
     }
 
-    public int getUsersId() {
-        return usersId;
+    public String getDescriptionMessage() {
+        return descriptionMessage;
     }
 
-    public void setUsersId(int usersId) {
-        this.usersId = usersId;
+    public void setDescriptionMessage(String descriptionMessage) {
+        this.descriptionMessage = descriptionMessage;
+    }
+
+    public LocalDate getDateMessage() {
+        return dateMessage;
+    }
+
+    public void setDateMessage(LocalDate dateMessage) {
+        this.dateMessage = dateMessage;
+    }
+
+    public Chat getChat() {
+        return chat;
+    }
+
+    public void setChat(Chat chat) {
+        this.chat = chat;
     }
 }
